@@ -6,10 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hocAI - Hướng dẫn giáo viên sử dụng công cụ AI</title>
     <link rel="icon" type="image/png" href="asset/logo/web.png">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/headfoot.css">
+    <link rel="stylesheet" href="css/all.css">
 </head>
 
 <body>
+
+    <!--CHAT BUTTON-->
+    <div class="chat-button">
+        <img src="asset/logo/chat.svg" alt="Chat">
+    </div>
+    <!--CUỘN LÊN ĐẦU TRANG-->
+    <div class="scroll-to-top">
+        <img src="asset/logo/up.svg" alt="Scroll to top">
+    </div>
     <!-- THANH TÌM KIẾM !-->
     <section class="search-bar">
         <div class="search-bar-container">
@@ -57,10 +68,29 @@
                 </svg>
             </div>
             <div class="side-bar-login">
-                <a href="#">Đăng nhập</a>
+                <a href="javascript:void(0);" id="login-info">Đăng nhập</a>
             </div>
         </div>
     </section>
+    <!--THÔNG TIN CÁ NHÂN!-->
+    <div id="userPopupOverlay" class="popup-overlay">
+        <div id="userInfoPopup" class="popup-container">
+            <div class="popup-header">
+                <h2>THÔNG TIN TÀI KHOẢN</h2>
+                <button id="closePopupBtn" class="popup-close-btn">&times;</button>
+            </div>
+            <div class="popup-content">
+                <p><strong>Tên người dùng:</strong> <span id="popup-username"></span></p>
+                <p><strong>Tài khoản:</strong> <span id="popup-account"></span></p>
+                <p><strong>Email:</strong> <span id="popup-email"></span></p>
+                <p><strong>Ngày tham gia:</strong> <span id="popup-logindate"></span></p>
+                <hr>
+                <p><strong>Khoá học của bạn:</strong></p>
+                <div id="popup-courses" class="popup-scrollable-content">
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- BANNER ĐẦU TRANG !-->
     <section class="banner-head">
         <div class="banner-head-container">
@@ -76,7 +106,8 @@
             <div class="banner-head-right">
                 <h1>Khoá học của hocAI có gì ?</h1>
                 <ul>
-                    <li>✓ Hướng dẫn sử dụng các công cụ AI hỗ trợ việc giảng dạy ( Cách hỏi AI đúng, cách dùng AI giải
+                    <li>✓ Hướng dẫn sử dụng các công cụ AI hỗ trợ việc giảng dạy ( Cách hỏi AI đúng, cách dùng AI
+                        giải
                         đáp, hỗ trợ các công cụ như PowerPoint, Excel, Word,.... )</li>
                     <li>✓ Cách tạo nội dung, tóm tắt nội dung hỗ trợ việc tạo bài giảng</li>
                     <li>✓ Hướng dẫn sử dụng Kahoot! để tạo trò chơi giáo dục</li>
@@ -92,19 +123,22 @@
                 <div class="pr-box">
                     <img src="asset/logo/logoprbox1.png" alt="AI">
                     <h3>ỨNG DỤNG AI</h3>
-                    <p>Chúng tôi giúp bạn biết cách khai thác, sử dụng công cụ AI phục vụ cho công việc, cuộc sống hàng
+                    <p>Chúng tôi giúp bạn biết cách khai thác, sử dụng công cụ AI phục vụ cho công việc, cuộc sống
+                        hàng
                         ngày của bạn.</p>
                 </div>
                 <div class="pr-box">
                     <img src="asset/logo/logoprbox2.png" alt="Sáng tạo">
                     <h3>SÁNG TẠO TRONG GIẢNG DẠY</h3>
-                    <p>Sử dụng các công cụ AI thay đổi cách dạy học truyền thống, giúp bạn trở nên hiện đại, tăng hứng
+                    <p>Sử dụng các công cụ AI thay đổi cách dạy học truyền thống, giúp bạn trở nên hiện đại, tăng
+                        hứng
                         thú trong lớp học.</p>
                 </div>
                 <div class="pr-box">
                     <img src="asset/logo/logoprbox3.png" alt="Tối ưu">
                     <h3>TĂNG HIỆU SUẤT LÀM VIỆC</h3>
-                    <p>Kết hợp cùng các công cụ AI có thể giúp rút ngắn thời gian các tác vụ công việc thường ngày, tăng
+                    <p>Kết hợp cùng các công cụ AI có thể giúp rút ngắn thời gian các tác vụ công việc thường ngày,
+                        tăng
                         hiệu suất công việc của bạn,</p>
                 </div>
             </div>
@@ -125,7 +159,8 @@
                         <img src="asset/banner/introview.png" alt="học AI tại hocAI ngay">
                     </div>
                     <div class="introview-box-right">
-                        <p>Tăng cường kỹ năng sử dụng công nghệ sẽ giúp bạn không bị lạc hậu trong thời đại công nghệ
+                        <p>Tăng cường kỹ năng sử dụng công nghệ sẽ giúp bạn không bị lạc hậu trong thời đại công
+                            nghệ
                             4.0, tự động hoá hiện nay</p>
                         <h2>Hãy sử dụng các công cụ công nghệ như một trợ lý ảo của bạn !!!</h2>
                         <p>Vậy làm sao để sử dụng, sử dụng sao cho hiệu quả....</p>
@@ -146,7 +181,8 @@
                         </div>
                         <div class="demo-box-text">
                             <h3>GIAO DIỆN TRỰC QUAN</h3>
-                            <p>Giao diện trang học tập trực quan giúp bạn dễ dàng theo dõi tiến độ học tập, các danh mục
+                            <p>Giao diện trang học tập trực quan giúp bạn dễ dàng theo dõi tiến độ học tập, các danh
+                                mục
                                 bài học</p>
                         </div>
                     </div>
@@ -156,7 +192,8 @@
                         </div>
                         <div class="demo-box-text">
                             <h3>CÂU HỎI TƯƠNG TÁC</h3>
-                            <p>Câu hỏi tương tác hiện lên ngẫu nhiên trong các bài học để giúp bạn dễ dàng nắm bắt nội
+                            <p>Câu hỏi tương tác hiện lên ngẫu nhiên trong các bài học để giúp bạn dễ dàng nắm bắt
+                                nội
                                 dung bài học mà không bị nhàm chán</p>
                         </div>
                     </div>
@@ -166,7 +203,8 @@
                         </div>
                         <div class="demo-box-text">
                             <h3>BÀI GIẢNG CHI TIẾT</h3>
-                            <p>Bài giảng có đầy đủ video hoặc ảnh minh hoạ, văn bản nội dung bài học, câu hỏi, bài tập
+                            <p>Bài giảng có đầy đủ video hoặc ảnh minh hoạ, văn bản nội dung bài học, câu hỏi, bài
+                                tập
                                 thực hành của từng bài học.
                             </p>
                         </div>
@@ -186,7 +224,8 @@
             <div class="info-container">
                 <div class="info-left">
                     <h1>TẠI SAO PHẢI CHỌN hocAI ?</h1>
-                    <h3>Chúng tôi cung cấp các khoá học miễn phí và tài liệu tóm tắt nội dung bài học mỗi khi bạn hoàn
+                    <h3>Chúng tôi cung cấp các khoá học miễn phí và tài liệu tóm tắt nội dung bài học mỗi khi bạn
+                        hoàn
                         thành 1 khoá học</h3>
                     <button>HỌC NGAY</button>
                 </div>
@@ -234,7 +273,8 @@
         </div>
     </section>
 </body>
-<script src="sidebar.js"></script>
-<script src="index.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/index.js"></script>
+<script src="js/all.js"></script>
 
 </html>
