@@ -2,7 +2,7 @@
     width: 98%;
     margin: auto;
     border-radius: 30px;
-    height: 700px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,19 +10,47 @@
     background: linear-gradient(to bottom, #F0F8FE, #A5C8D4);
 }
 
+/*Đánh dấu bắt buộc*/
 .login-required-note {
-    color: rgb(208, 105, 105);
+    color: rgb(232, 105, 105);
 }
 
+.signup-required {
+    display: flex;
+    color: rgb(229, 227, 227);
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 80%;
+    font-size: 14px;
+}
+
+.signup-required a {
+    color: rgb(232, 105, 105);
+    text-decoration: none;
+
+}
+
+/*tick lựa chọn*/
+.signup-choice {
+    width: 12px;
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 1px;
+    background-color: white;
+}
+
+/*login+signup box*/
 .login-container h1 {
     opacity: 0;
     animation-name: slideInFromTop;
-    animation-duration: 1s;
+    animation-duration: 0.8s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
     text-align: center;
     font-size: 40px;
     color: #003459;
+    margin-top: 60px;
 }
 
 .login-container h1 img {
@@ -31,10 +59,16 @@
     width: auto;
 }
 
-.login-box {
+.login-box,
+.signup-box {
+    display: none;
+}
+
+.login-box.active,
+.signup-box.active {
     opacity: 0;
     animation-name: slideInFromBottom;
-    animation-duration: 1s;
+    animation-duration: 0.8s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
     margin-top: 20px;
@@ -44,16 +78,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 60px;
+    padding: 20px 0px;
 }
 
-.login-box h2 {
+.login-box,
+.signup-box h2 {
     width: 100%;
     text-align: center;
     color: white;
-    padding: 20px 0px 10px 0px;
+    padding: 0px 0px 10px 0px;
 }
 
-.login-box form p {
+/*form*/
+form p {
+    text-align: left;
     padding: 10px 0px 5px 0px;
     color: white;
 }
@@ -69,6 +108,11 @@ form input {
     width: 100%;
     height: 40px;
     border-radius: 10px;
+}
+
+form input:focus {
+    outline: 1px dotted white;
+    outline-offset: 2px;
 }
 
 button {
@@ -87,12 +131,21 @@ button {
     width: 80%;
 }
 
-.login-text p a {
-    color: #AEE2F6;
+.login-text p:nth-child(4) {
+    padding-bottom: 20px;
 }
 
+.login-text p {
+    text-align: left;
+}
+
+.login-text p a {
+    color: #AEE2F6;
+
+}
+
+/*google login*/
 .google-login-button {
-    margin: 20px 0px;
     padding: 5px 5px 5px 15px;
     display: flex;
     width: 60%;
@@ -132,5 +185,35 @@ button {
     to {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+@media screen and (max-width: 799px) {
+    .login-container h1 {
+        font-size: 30px;
+    }
+
+    .login-box.active,
+    .signup-box.active {
+        width: 90%;
+    }
+
+    .google-login-button {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1200px) {
+    .login-container h1 {
+        font-size: 35px;
+    }
+
+    .login-box.active,
+    .signup-box.active {
+        width: 60%;
+    }
+
+    .google-login-button {
+        width: 50%;
     }
 }

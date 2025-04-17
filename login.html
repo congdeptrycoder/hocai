@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hocAI - Hướng dẫn giáo viên sử dụng công cụ AI</title>
+    <title>Đăng nhập</title>
     <link rel="icon" type="image/png" href="public/images/logo/web.png">
     <link rel="stylesheet" href="public/css/headfoot.css">
     <link rel="stylesheet" href="public/css/all.css">
@@ -16,11 +16,11 @@
     <section class="side-bar">
         <div class="side-bar-container">
             <div class="side-bar-logo">
-                <a href="index.html"><img src="public/images/logo/web.png" alt="logo"></a>
+                <a href="index.html" class="link"><img src="public/images/logo/web.png" alt="logo"></a>
             </div>
             <div class="side-bar-menu">
                 <ul>
-                    <li><a href="index.html">QUAY LẠI TRANG CHỦ</a></li>
+                    <li><a href="index.html" class="link">TRANG CHỦ</a></li>
                     <li><a href="#">GIỚI THIỆU hocAI</a></li>
                     <li class="hasdropdown"><a>CHỌN KHOÁ HỌC</a>
                         <ul class="dropdown-menu">
@@ -42,24 +42,24 @@
             </div>
         </div>
     </section>
-    <!--LOGIN-->
+    <!--LOGIN FORM-->
     <section class="login">
 
         <div class="login-container">
             <h1>Chào mừng bạn đến với,<img src="public/images/logo/web.png" alt="hocAI"></h1>
-            <div class="login-box">
+            <div class="login-box active">
                 <h2>ĐĂNG NHẬP</h2>
                 <form action="" method="post">
-                    <p>Tài khoản/email <span class="login-required-note">(*)</span></p>
+                    <p>Tài khoản/email <span class="login-required-note">*</span></p>
                     <input type="text" name="username" required>
-                    <p>Mật khẩu <span class="login-required-note">(*)</span></p>
+                    <p>Mật khẩu <span class="login-required-note">*</span></p>
                     <input type="password" name="password" required>
                     <button type="submit">Đăng nhập</button>
                 </form>
                 <div class="login-text">
                     <p><a href="#">Quên tài khoản hoặc mật khẩu</a></p>
                     <p>Bạn chưa có tài khoản ?</p>
-                    <p><a href="#">Đăng ký ngay</a></p>
+                    <p id="signup"><a href="#">Đăng ký ngay</a></p>
                     <p style="font-style: italic; font-size: 14px;">( Bạn có thể học mà không cần đăng nhập, tuy nhiên
                         tiến
                         trình học của bạn sẽ không được lưu lại nếu bạn tải lại trang )</p>
@@ -67,6 +67,33 @@
                         <a href="google.com"> Đăng nhập bằng tài khoản Google</a>
                         <img src="public/images/logo/gg.png" alt="Google">
                     </div>
+                </div>
+            </div>
+            <div class="signup-box">
+                <h2>ĐĂNG KÝ</h2>
+                <div class="google-login-button">
+                    <a href="google.com"> Đăng ký bằng tài khoản Google</a>
+                    <img src="public/images/logo/gg.png" alt="Google">
+                </div>
+                <form action="" method="post">
+                    <p>Tài khoản/email <span class="login-required-note">*</span></p>
+                    <input type="text" name="username" required>
+                    <p>Tên của bạn <span class="login-required-note">*</span></p>
+                    <input type="name" name="password" required>
+                    <p>Mật khẩu <span class="login-required-note">*</span></p>
+                    <input type="password" name="password" required>
+                    <button type="submit">Đăng ký</button>
+                </form>
+                <div class="signup-required">
+                    <div class="signup-choice">
+
+                    </div>
+                    <p>Tôi đồng ý với <a href="#">chính sách bảo mật </a>của hocAI <span
+                            class="login-required-note">*</span></p>
+                </div>
+                <div class="login-text">
+                    <p>Bạn đã có tài khoản ?</p>
+                    <p id="login"><a href="#">Quay lại đăng nhập</a></p>
                 </div>
             </div>
         </div>
@@ -103,7 +130,9 @@
             </div>
         </div>
     </footer>
+    <div class="transition-overlay"></div>
     <script src="public/js/sidebar.js"></script>
+    <script src="public/js/login.js"></script>
     <script src="public/js/all.js"></script>
 </body>
 

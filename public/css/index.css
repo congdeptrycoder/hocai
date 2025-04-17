@@ -200,11 +200,11 @@
     align-items: center;
 }
 
-.introview-container h2 {
+.introview-container>h2 {
     text-align: center;
 }
 
-.introview-container h2:nth-child(2) {
+.introview-container>h2:nth-child(2) {
     width: 60%;
 }
 
@@ -216,6 +216,8 @@
 
 .introview-box-left {
     width: 40%;
+    display: flex;
+    align-items: center;
 }
 
 .introview-box-left img {
@@ -228,6 +230,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.introview-box-right h2 {
+    width: 90%;
+    padding-bottom: 20px;
 }
 
 .introview-box-right p {
@@ -423,8 +430,8 @@
 }
 
 
-
-@media screen and (max-width: 900px) {
+/*mobile*/
+@media screen and (max-width: 799px) {
 
     /*banner đầu trang*/
     .banner-head-container {
@@ -497,6 +504,7 @@
         width: 100%;
     }
 
+
     .introview-box-left {
         width: 60%;
     }
@@ -539,6 +547,7 @@
         width: 95%;
     }
 
+    /*info*/
     .info-container {
         flex-direction: column;
         align-items: center;
@@ -579,4 +588,78 @@
         padding-top: 30px;
     }
 
+}
+
+@media screen and (min-width: 800px) and (max-width: 1200px) {
+
+    /*introview*/
+    .introview-box-right h2 {
+        width: 100%;
+    }
+
+    /*demo*/
+    .demo-container {
+        margin-top: 30px;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .demo-left {
+        width: 100%;
+    }
+
+    .demo-box-choice {
+        margin: 0px 0px 10px 0px;
+        width: 80%;
+    }
+
+    .demo-right {
+        width: 80%;
+    }
+
+    .demo-image {
+        width: 95%;
+    }
+
+    /*info*/
+    .info-container {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .info-left {
+        width: 100%;
+        height: auto;
+        order: 2;
+        padding-bottom: 30px;
+    }
+
+    .info-left h1 {
+        padding: 50px 40px 0px 40px;
+    }
+
+    .info-left h3 {
+        padding: 0px 40px 0px 40px;
+    }
+
+    .info-left button {
+        margin: 10px 40px 0px 40px;
+        width: 40%;
+        font-size: 16px;
+    }
+
+    .info-right {
+        width: 100%;
+        height: auto;
+        order: 1;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .info-right-text p:first-child {
+        padding-top: 30px;
+    }
 }
