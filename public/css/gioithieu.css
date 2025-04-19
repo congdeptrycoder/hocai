@@ -1,0 +1,141 @@
+.chungtoila {
+  margin-top: 200px;
+  display: flex;               /* Xếp theo chiều ngang */
+  justify-content: space-between; /* Khoảng cách đều */
+  align-items: center;         /* Căn chỉnh theo chiều dọc */
+}
+
+.hinh2 img {
+  border-radius: 510px ;
+  margin-left : 150px ; 
+  width: 600px ;    /* kích thước ảnh thứ hai */
+  height: auto;                /* Giữ tỷ lệ ảnh */
+}
+
+.loigioithieu {
+  margin-left : 150px ; 
+ 
+  flex: 1;                     /* Cho phép phần văn bản chiếm hết không gian còn lại */
+}
+.loigioithieu p {
+  font-size : 33px ; 
+}
+.loigioithieu img {
+  width: 200px ;          /* Giảm kích thước logo */
+  height: auto;
+  margin-top: 20px;            /* Khoảng cách giữa văn bản và logo */
+}
+.chungtoimangden 
+{
+  margin-top : 200px ;
+  background-color : #007ea7 ;
+  border-radius : 15px ; 
+  text-align : center ;
+
+}
+.chungtoimangden h1 {
+  font-size : 50px;
+}
+.bamuctieu {
+  margin-top: 100px ;
+  display: flex;               /* Xếp theo chiều ngang */
+  justify-content: space-between; /* Khoảng cách đều */
+  align-items: center;         /* Căn chỉnh theo chiều dọc */
+}
+.muctieu1 {
+  background-color: #fff;          /* Màu nền trắng */
+  padding: 15px;                   /* Khoảng cách bên trong hộp */
+  border-radius: 50px ;         /* Bo tròn các góc */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+ width: 400px;  
+  height : 300px ; 
+  margin: 20px;                    /* Khoảng cách ngoài hộp */
+  font-size: 30px ;               /* Kích thước chữ */
+  color: #333;
+}
+.muctieu2 {
+  background-color: #fff;          /* Màu nền trắng */
+  padding: 50px ;                 /* Khoảng cách bên trong hộp */
+  border-radius: 50px ;          /* Bo tròn các góc */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+  width: 400px; 
+  height : 300px ; 
+  margin: 20px;                    /* Khoảng cách ngoài hộp */
+  font-size: 30px ;               /* Kích thước chữ */
+  color: #333;
+}
+.muctieu3 
+{
+  
+    background-color: #fff;          /* Màu nền trắng */
+    padding: 15px;                   /* Khoảng cách bên trong hộp */
+    border-radius: 50px ;        /* Bo tròn các góc */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    width: 400px;                /* Chiều rộng tối đa của hộp */
+    height : 300px ; 
+    margin: 20px;                    /* Khoảng cách ngoài hộp */
+    font-size: 30px ;               /* Kích thước chữ */
+    color: #333;
+  }
+.doituonghuongden {
+  margin-top: 200px;
+  display: flex;               /* Xếp theo chiều ngang */
+  justify-content: space-between; /* Khoảng cách đều */
+  align-items: center;         /* Căn chỉnh theo chiều dọc */
+}
+.text-overlay {
+  position: absolute; /* Đặt vị trí tuyệt đối cho văn bản */
+  top:60% ;    /* Đặt văn bản vào giữa theo chiều dọc */
+  left: 40%;       /* Đặt văn bản vào giữa theo chiều ngang */
+  transform: translate(-50%, -50%); /* Căn chỉnh chính xác văn bản vào giữa */
+  color: white;       /* Màu chữ */
+  font-size: 30px ; /* Kích thước chữ */
+  font-weight: bold;  /* Đặt chữ đậm */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Đổ bóng cho chữ */
+}
+
+.doituonghuongden { 
+  position: relative; /* Đặt vị trí cho phần tử chứa */
+  width: 500px;       /* Chiều rộng của phần tử chứa (ảnh) */
+  height: 300px;      /* Chiều cao của phần tử chứa (ảnh) */
+}
+
+.muiten {
+  width: 100%;        /* Ảnh sẽ chiếm 100% chiều rộng của phần tử chứa */
+  height: 100%;       /* Ảnh sẽ chiếm 100% chiều cao của phần tử chứa */
+  object-fit: cover;  /* Đảm bảo ảnh không bị méo, vẫn giữ tỷ lệ */
+}
+.cacdoituong {
+  display: flex;                /* Xếp các phần tử theo chiều dọc */
+  flex-direction: column;       /* Xếp các phần tử con theo chiều dọc */
+  align-items: center;          /* Căn giữa các phần tử theo chiều ngang */
+  width: 30%;              /* Chiếm nửa màn hình bên phải */
+  margin-left: 500px ;
+}.item  {
+  display: flex;
+  flex-direction: column;        /* Xếp các phần tử theo chiều dọc */
+  justify-content: center;       /* Căn giữa các phần tử theo chiều dọc */
+  width: 50%;                    /* Chiếm nửa màn hình bên trái */
+}
+
+.item {
+  text-align: center;            /* Căn giữa ảnh và văn bản */
+  margin-bottom: 20px;            /* Khoảng cách giữa các phần tử */
+}
+
+.item img {
+  width: 80%;                    /* Ảnh chiếm 80% chiều rộng của phần tử chứa */
+  height: auto;                  /* Giữ tỷ lệ ảnh */
+  max-width: 150px;              /* Giới hạn kích thước ảnh */
+}
+
+.camonvi  {
+  margin-top : 1000px ;
+  
+}
+.camonvi h1 {text-align: center ;
+  color:#007ea7 ;
+}
+.footer {
+  margin-top : 500px ; 
+}

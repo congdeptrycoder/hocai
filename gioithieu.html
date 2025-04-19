@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hocAI - Hướng dẫn giáo viên sử dụng công cụ AI</title>
+    <link rel="icon" type="image/png" href="public/images/logo/web.png">
+    <link rel="stylesheet" href="public/css/index.css">
+    <link rel="stylesheet" href="public/css/headfoot.css">
+    <link rel="stylesheet" href="public/css/all.css">
+    <link rel="stylesheet" href="css/chinhsachbaomat.css">
+    <link rel="stylesheet" href="css/gioithieu.css">
+</head>
+
+<body>
+    <!--KHUNG CHAT-->
+    <div class="chat-button" id="chatButton">
+        <img src="public/images/logo/chat.svg" alt="Chat">
+    </div>
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <span>Chat với hỗ trợ viên</span>
+            <button class="close-chat-btn" id="closeChat">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Nhập tin nhắn của bạn...">
+            <button id="sendChatBtn">Gửi</button>
+        </div>
+    </div>
+    <!--CUỘN LÊN ĐẦU TRANG-->
+    <div class="scroll-to-top">
+        <img src="public/images/logo/up.svg" alt="Scroll to top">
+    </div>
+    <!-- THANH TÌM KIẾM !-->
+    <section class="search-bar">
+        <div class="search-bar-container">
+            <div class="left-search-box">
+                <p> Let's learn !!!</p>
+            </div>
+            <div class="search-box">
+                <img src="public/images/logo/search.svg">
+                <input type="text" placeholder="Tìm kiếm khoá học...">
+
+            </div>
+            <div class="right-search-box">
+                <img src="public/images/logo/chatgpt.png" alt="ChatGPT">
+                <img src="public/images/logo/kahoot.png" alt="Kahoot">
+                <img src="public/images/logo/pp.png" alt="Powerpoint">
+            </div>
+        </div>
+    </section>
+    <!-- THANH CÔNG CỤ !-->
+    <section class="side-bar">
+        <div class="side-bar-container">
+            <div class="side-bar-logo">
+                <a href="index.html" class="link"><img src="public/images/logo/web.png" alt="logo"></a>
+            </div>
+            <div class="side-bar-menu">
+                <ul>
+                    <li><a href="index.html" class="link">TRANG CHỦ</a></li>
+                    <li><a href="gioithieu.html" class="link">GIỚI THIỆU hocAI</a></li>
+                    <li class="hasdropdown"><a>CHỌN KHOÁ HỌC</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="link">Ứng dụng trí tuệ nhân tạo ( ChatGPT, Deepseek, Grok,...)</a>
+                            </li>
+                            <li><a href="#" class="link">Kahoot ( Tạo trò chơi giáo dục )</a></li>
+                            <li><a href="#" class="link">Gammar AI ( Tạo slide tự động )</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="donggop.html" class="link">ĐÓNG GÓP</a></li>
+                </ul>
+            </div>
+            <div class="side-bar-toggle">
+                <svg width="20" height="20" viewBox="0 0 20 20">
+                    <rect width="20" height="2" y="3" class="line-1"></rect>
+                    <rect width="20" height="2" y="9" class="line-2"></rect>
+                    <rect width="20" height="2" y="9" class="line-3"></rect>
+                    <rect width="20" height="2" y="15" class="line-4"></rect>
+                </svg>
+            </div>
+            <div class="side-bar-login">
+                <a href="login.html" id="login-info" class="link">Đăng nhập</a>
+            </div>
+        </div>
+    </section>
+    <!--THÔNG TIN CÁ NHÂN!-->
+    <div id="userPopupOverlay" class="popup-overlay">
+        <div id="userInfoPopup" class="popup-container">
+            <div class="popup-header">
+                <h2>THÔNG TIN TÀI KHOẢN</h2>
+                <button id="closePopupBtn" class="popup-close-btn">&times;</button>
+            </div>
+            <div class="popup-content">
+                <p><strong>Tên người dùng:</strong> <span id="popup-username"></span></p>
+                <p><strong>Tài khoản:</strong> <span id="popup-account"></span></p>
+                <p><strong>Email:</strong> <span id="popup-email"></span></p>
+                <p><strong>Ngày tham gia:</strong> <span id="popup-logindate"></span></p>
+                <hr>
+                <p><strong>Khoá học của bạn:</strong></p>
+                <div id="popup-courses" class="popup-scrollable-content">
+                </div>
+                <div class="popup-edit">
+                    <button>Sửa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hinh1-gioithieu">
+        <img src="public/images/td_gt/hinh1-gioithieu.png" alt="hinh1">
+    </div>
+    <!--Giới thiệu chúng tôi là!-->
+    <!--sửa toàn bộ class thành tiếng anh, tuân theo bắt buộc: phải chia section (class section là nội dung của phần đó) -> div container
+     của cả trang -> div container của riêng section-->
+    <section class="chunghtoila">
+        <div class="chungtoila ">
+            <div class="hinh2">
+                <img src="public/images/td_gt/hinh2-gioithieu.png" alt="hinh2">
+
+            </div>
+            <div class="loigioithieu">
+                <p>Bắt đầu từ niềm đam mê công nghệ, chúng tôi</p>
+                <p>– một nhóm sinh viên trẻ – đang nỗ lực xây dựng</p>
+                <p> giải pháp giúp giáo viên và mọi người</p>
+                <p>có thể sử dụng AI một cách dễ dàng, hiệu</p>
+                <p> quả và thân thiện hơn bao giờ hết.</p>
+                <img src="public/images/logo/web.png" alt="hocAI">
+            </div>
+
+
+        </div>
+    </section>
+    <div class="chungtoimangden ">
+        <h1>Chúng tôi mang sứ mệnh thực hiện các mục tiêu </h1>
+    </div>
+    <!--ba mục tiêu -->
+    <section class="bamuctieu">
+        <div class="bamuctieu ">
+            <div class="muctieu1 ">
+                <p>Hướng dẫn sử dụng các công cụ AI phổ biến như ChatGPT, Kahoot và Gamma AI một cách đơn giản, dễ
+                    hiểu – không cần kiến thức kỹ thuật phức tạp
+            </div>
+            <div class="muctieu2 ">
+                <p>
+                    Hỗ trợ giáo viên và người học sáng tạo nội dung giảng dạy, thuyết trình và tương tác hiệu quả
+                    hơn bằng sức mạnh của AI.
+                </p>
+            </div>
+            <div class="muctieu3 ">
+                <p>Lan tỏa tinh thần học tập chủ động, ứng dụng công nghệ mới vào giáo dục một cách gần gũi và thực
+                    tiễn</p>
+            </div>
+        </div>
+    </section>
+    <!--đối tượng hướng đến-->
+    <section class="doituonghuongden ">
+        <div class="doituonghuongden ">
+            <div class="muiten">
+                <img src="public/images/td_gt/muiten-gioithieu.png" alt="->">
+                <div class="text-overlay">Đối tượng hướng đến </div>
+
+            </div>
+            <div class="cacdoituong">
+                <div class="item">
+                    <img src="public/images/td_gt/giaovien-gioithieu.png" alt="Giáo viên">
+
+
+                </div>
+                <div class="vb">
+                    <p>Giáo viên, người thiết kế bài giảng , học liệu </p>
+                </div>
+
+                <div class="item">
+                    <img src="public/images/td_gt/hocsinh-gioithieu.png" alt="Học sinh">
+                </div>
+                <div class="vb">
+                    <p>Học sinh, sinh viên</p>
+                </div>
+                <div class="item">
+                    <img src="public/images/td_gt/nguoidilam-gioithieu.png" alt="Người đi làm">
+                </div>
+                <div class="vb">
+                    <p>Người đi làm, những người yêu thích công nghệ</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <div class="camonvi">
+        <h1>Cảm ơn người học đã tin tưởng và lựa chọn !</h1>
+    </div>
+</body>
+<!--FOOTER!-->
+<footer>
+    <div class="main-container">
+        <div class="footer-container">
+            <div class="footer-box">
+                <div class="footer-box1">
+                    <img src="public/images/logo/web.png" alt="logo">
+                </div>
+                <div class="footer-box2">
+                    <h3><a href="#" class="link">HƯỚNG DẪN SỬ DỤNG</a></h3>
+                    <h3><a href="gioithieu.html" class="link">VỀ CHÚNG TÔI</a></h3>
+                    <h3><a href="#" class="link">KHOÁ HỌC SỬ DỤNG CHATBOT AI</a></h3>
+                    <h3><a href="#" class="link">KHOÁ HỌC TẠO BÀI TẬP SỐ</a></h3>
+                    <h3><a href="#" class="link">KHOÁ HỌC TẠO SLIDE BẰNG AI</a></h3>
+                </div>
+                <div class="footer-box3">
+                    <h3><a href="csbm.html" class="link">CHÍNH SÁCH BẢO MẬT</a></h3>
+                    <h3><a href="#">PHẢN HỒI</a></h3>
+                </div>
+                <div class="footer-box4">
+                    <h3><a href="tuyendung.html" class="link">TUYỂN DỤNG</a></h3>
+                    <h3><a href="#">LIÊN HỆ</a></h3>
+                    <a href="#"><img src="public/images/logo/tele.png" alt="Telegram"></a>
+                    <a href="#"><img src="public/images/logo/fb.png" alt="Facebook"></a>
+
+                </div>
+            </div>
+            <p>© 2025 hocAI, HUST.</p>
+        </div>
+    </div>
+</footer>
+<div class="transition-overlay"></div>
+<script src="public/js/sidebar.js"></script>
+<script src="public/js/index.js"></script>
+<script src="public/js/all.js"></script>
+</body>
+
+</html>

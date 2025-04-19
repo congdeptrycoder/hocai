@@ -1,0 +1,26 @@
+.hinh1 img {         
+    width: 100%; /* Điều chỉnh kích thước theo chiều rộng của phần tử chứa */
+    height: auto; /* Tự động điều chỉnh chiều cao để giữ tỷ lệ */
+}
+.thongbao {
+    margin-top: 45px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1) inset;
+    overflow: visible; /* Đảm bảo không bị ẩn */ 
+}
+.thongbao h1 {
+    text-align: center;
+    color : #007ea7; 
+    font-size : 50px ;
+}
+.hightlight {
+    color : #007ea7 ; 
+}
+.p {
+ 
+    font-size : 50px ;
+}
+.noidung {
+    padding-left: 220px ;
+}
