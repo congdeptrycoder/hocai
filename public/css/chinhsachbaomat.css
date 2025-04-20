@@ -1,4 +1,4 @@
-.chinhsach-container {
+.policy-container {
     display: flex;
     /* Đảm bảo chứa hộp có thể sử dụng flexbox */
     justify-content: center;
@@ -9,7 +9,7 @@
     /* Đảm bảo chiều cao của container chiếm toàn bộ chiều cao của trang */
 }
 
-.chinhsach-container-box {
+.policy-container-box {
     width: 80%;
     max-width: 1440px;
     padding: 20px;
@@ -20,19 +20,18 @@
     overflow: visible;
     /* Đảm bảo không bị ẩn */
 }
-
-.chinhsach-title {
+.policy-title {
     border-bottom: 2px solid #003459;
 }
 
-.chinhsach-title h1 {
+.policy-title h1 {
     text-align: center;
     margin-top: 30px;
     font-size: 60px;
 }
 
 
-.chinhsach-content {
+.policy-content {
     margin-top: 40px;
 }
 
@@ -48,6 +47,12 @@ ol {
 
 ol>li {
     list-style-type: decimal !important;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+.policy-content >ol >li > ul > li {
+    list-style-type: disc !important;
     text-align: left;
     padding-bottom: 10px;
 }

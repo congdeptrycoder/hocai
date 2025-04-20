@@ -1,3 +1,11 @@
+//Nếu bấm nút back/forward
+window.addEventListener('pageshow', function (event) {
+    if (event.persisted) {
+        document.body.classList.remove('page-exiting-left');
+        document.documentElement.style.overflowX = '';
+        document.body.style.overflowX = '';
+    }
+});
 //Hiệu ứng scroll
 const scrollElements = document.querySelectorAll('.scroll');
 
@@ -129,16 +137,31 @@ document.addEventListener('DOMContentLoaded', function () {
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
     }
+
     //Animation sang trang khác
     document.querySelectorAll('a.link').forEach(link => {
         console.log(link)
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            const overlay = document.querySelector('.transition-overlay');
-            overlay.classList.add('active');
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 400); // Thời gian khớp với transition CSS
+        link.addEventListener('click', function (event) {
+            const href = this.getAttribute('href');
+            const target = this.getAttribute('target'); // Kiểm tra target="_blank"
+
+            // Kiểm tra link hợp lệ, không phải link neo (#) và không phải target="_blank"
+            if (href && href !== '#' && !href.startsWith('javascript:') && target !== '_blank') {
+                event.preventDefault(); // Ngăn chuyển trang ngay lập tức
+
+                // Ngăn thanh cuộn ngang xuất hiện trong khi chuyển động
+                // Áp dụng cho cả html và body để đảm bảo
+                document.documentElement.style.overflowX = 'hidden';
+                document.body.style.overflowX = 'hidden';
+
+                // Thêm class để kích hoạt animation trượt sang trái
+                document.body.classList.add('page-exiting-left');
+
+                // Đợi animation hoàn thành rồi mới chuyển trang
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 500);
+            }
         });
     });
 });

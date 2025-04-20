@@ -1,0 +1,363 @@
+/* Font mặc định */
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* MAIN LAYOUT */
+.studysite {
+  display: flex;
+  padding: 5rem;
+  background: rgba(0, 0, 0, 0.08);
+  gap: 2rem;
+}
+
+/* LIST BÀI HỌC */
+.listlesson {
+  background: #fff;
+  border-radius: 30px;
+  padding: 1.5rem;
+  width: 355px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  /*Thêm flex cho nội dung, và flex-start để độ cao chỉ bằng nội dung bên trong*/
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.listlesson h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #003459;
+}
+
+.listlesson ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listlesson .chapter {
+  background-color: #f1f5f9;
+  font-weight: bold;
+  color: #003459;
+  padding: 12px 16px;
+  margin: 16px 0 8px;
+  font-size: 16px;
+}
+
+.listlesson .item {
+  padding: 10px 16px;
+  font-size: 15px;
+  color: #575A66;
+  font-weight: bold;
+  margin-left: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.2s ease;
+}
+
+.listlesson .item:hover {
+  background-color: #f0f9ff;
+  cursor: pointer;
+}
+
+.listlesson .item.active {
+  font-weight: bold;
+  color: #59709F;
+}
+
+
+/* CONTENT */
+.content {
+  flex: 1;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.content h2 {
+  font-size: 20px;
+  color: #003459;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #dbeafe;
+  border-radius: 6px;
+  margin: 0.5rem 0 1.5rem;
+  position: relative;
+  width: 70%;
+}
+
+.progress {
+  height: 6px;
+  background: #003459;
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* VIDEO */
+.video-placeholder {
+  width: 100%;
+  height: 220px;
+  background: #f1f5f9;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
+/* BOX HIGHLIGHT */
+.highlight-box {
+  background: #eff6ff;
+  padding: 1.5rem;
+  border-radius: 30px;
+  margin: 1.5rem auto;
+  max-width: 892px;
+}
+
+.highlight-box h4 {
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #003459;
+  font-family: 'Inter', sans-serif;
+}
+
+
+.highlight-box ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.highlight-box li {
+  display: list-item;
+  list-style-type: disc;
+}
+
+
+
+/* FEATURE BOXES */
+.feature-grid {
+  display: flex;
+  gap: 1rem;
+}
+
+.feature {
+  flex: 1;
+  border-radius: 10px;
+  display: flex;
+  gap: 12px;
+  padding: 1rem;
+  align-items: center;
+  border: 1px solid #e5e7eb;
+}
+
+.feature .icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+}
+
+.feature.green .icon {
+  background-color: #d1fae5;
+}
+
+.feature.purple .icon {
+  background-color: #ede9fe;
+}
+
+.feature .text {
+  font-size: 14px;
+}
+
+.feature .text strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* BUTTONS */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+}
+
+.btn.primary {
+  background: #003459;
+  color: white;
+}
+
+.btn.light {
+  background: #dbeafe;
+}
+
+.btn.gray {
+  background: #e5e7eb;
+}
+
+.comment-btn {
+  margin-top: 0.5rem;
+  background: #3b82f6;
+  color: white;
+}
+
+/* COMMENT */
+.comment-section textarea {
+  width: 100%;
+  height: 80px;
+  border-radius: 6px;
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.comment-section h4 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.comment-section h4 span {
+  font-weight: normal;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.comments p {
+  margin-top: 1rem;
+  font-size: 15px;
+}
+
+/* FOOTER */
+.footer {
+  background: #fff;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.footer-col {
+  min-width: 180px;
+}
+
+.footer-col h4 {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col li {
+  margin: 6px 0;
+}
+
+.footer-col img {
+  height: 28px;
+}
+
+.chat-link {
+  color: #ef4444;
+  margin-left: 4px;
+}
+
+.scroll-top {
+  color: #ef4444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hover-red:hover {
+  color: red;
+}
+
+.note {
+  color: red;
+}
+
+@media screen and (min-width: 800px) and (max-width: 1200px) {
+
+  /* HEADER */
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .user {
+    text-align: center;
+    font-size: 14px;
+  }
+
+  /* MAIN */
+  .main-container {
+    flex-direction: column;
+  }
+
+  .listlesson {
+    width: 100%;
+    order: 1;
+    margin-bottom: 20px;
+  }
+
+  .content {
+    width: 100%;
+    order: 2;
+  }
+
+  /* FEATURE GRID */
+  .feature-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .feature {
+    width: 100%;
+  }
+
+  /* NAV BUTTONS */
+  .nav-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  /* FOOTER */
+  .footer {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-col {
+    width: 100%;
+  }
+
+  .footer-col ul {
+    padding: 0;
+  }
+}

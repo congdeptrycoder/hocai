@@ -12,95 +12,100 @@
 </head>
 
 <body>
-    <!-- THANH CÔNG CỤ !-->
-    <section class="side-bar">
-        <div class="side-bar-container">
-            <div class="side-bar-logo">
-                <a href="index.html" class="link"><img src="public/images/logo/web.png" alt="logo"></a>
+    <header>
+        <!-- THANH CÔNG CỤ !-->
+        <section class="side-bar">
+            <div class="side-bar-container">
+                <div class="side-bar-logo">
+                    <a href="index.html" class="link"><img src="public/images/logo/web.png" alt="logo"></a>
+                </div>
+                <div class="side-bar-menu">
+                    <ul>
+                        <li><a href="index.html" class="link">TRANG CHỦ</a></li>
+                        <li><a href="gioithieu.html" class="link">GIỚI THIỆU hocAI</a></li>
+                        <li class="hasdropdown"><a>CHỌN KHOÁ HỌC</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="link">Ứng dụng trí tuệ nhân tạo ( ChatGPT, Deepseek,
+                                        Grok,...)</a>
+                                </li>
+                                <li><a href="#" class="link">Kahoot ( Tạo trò chơi giáo dục )</a></li>
+                                <li><a href="#" class="link">Gammar AI ( Tạo slide tự động )</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="donggop.html" class="link">ĐÓNG GÓP</a></li>
+                    </ul>
+                </div>
+                <div class="side-bar-toggle">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <rect width="20" height="2" y="3" class="line-1"></rect>
+                        <rect width="20" height="2" y="9" class="line-2"></rect>
+                        <rect width="20" height="2" y="9" class="line-3"></rect>
+                        <rect width="20" height="2" y="15" class="line-4"></rect>
+                    </svg>
+                </div>
             </div>
-            <div class="side-bar-menu">
-                <ul>
-                    <li><a href="index.html" class="link">TRANG CHỦ</a></li>
-                    <li><a href="gioithieu.html" class="link">GIỚI THIỆU hocAI</a></li>
-                    <li class="hasdropdown"><a>CHỌN KHOÁ HỌC</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" class="link">Ứng dụng trí tuệ nhân tạo ( ChatGPT, Deepseek, Grok,...)</a>
-                            </li>
-                            <li><a href="#" class="link">Kahoot ( Tạo trò chơi giáo dục )</a></li>
-                            <li><a href="#" class="link">Gammar AI ( Tạo slide tự động )</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="donggop.html" class="link">ĐÓNG GÓP</a></li>
-                </ul>
-            </div>
-            <div class="side-bar-toggle">
-                <svg width="20" height="20" viewBox="0 0 20 20">
-                    <rect width="20" height="2" y="3" class="line-1"></rect>
-                    <rect width="20" height="2" y="9" class="line-2"></rect>
-                    <rect width="20" height="2" y="9" class="line-3"></rect>
-                    <rect width="20" height="2" y="15" class="line-4"></rect>
-                </svg>
-            </div>
-        </div>
-    </section>
-    <!--LOGIN FORM-->
-    <section class="login">
+        </section>
+    </header>
+    <main>
+        <!--LOGIN FORM-->
+        <section class="login">
 
-        <div class="login-container">
-            <h1>Chào mừng bạn đến với,<img src="public/images/logo/web.png" alt="hocAI"></h1>
-            <div class="login-box active">
-                <h2>ĐĂNG NHẬP</h2>
-                <form action="" method="post">
-                    <p>Tài khoản/email <span class="login-required-note">*</span></p>
-                    <input type="text" name="username" required>
-                    <p>Mật khẩu <span class="login-required-note">*</span></p>
-                    <input type="password" name="password" required>
-                    <button type="submit">Đăng nhập</button>
-                </form>
-                <div class="login-text">
-                    <p><a href="#">Quên tài khoản hoặc mật khẩu</a></p>
-                    <p>Bạn chưa có tài khoản ?</p>
-                    <p id="signup"><a href="#">Đăng ký ngay</a></p>
-                    <p style="font-style: italic; font-size: 14px;">( Bạn có thể học mà không cần đăng nhập, tuy nhiên
-                        tiến
-                        trình học của bạn sẽ không được lưu lại nếu bạn tải lại trang )</p>
+            <div class="login-container">
+                <h1>Chào mừng bạn đến với,<img src="public/images/logo/web.png" alt="hocAI"></h1>
+                <div class="login-box active">
+                    <h2>ĐĂNG NHẬP</h2>
+                    <form action="" method="post">
+                        <p>Tài khoản/email <span class="login-required-note">*</span></p>
+                        <input type="text" name="username" required>
+                        <p>Mật khẩu <span class="login-required-note">*</span></p>
+                        <input type="password" name="password" required>
+                        <button type="submit">Đăng nhập</button>
+                    </form>
+                    <div class="login-text">
+                        <p><a href="#">Quên tài khoản hoặc mật khẩu</a></p>
+                        <p>Bạn chưa có tài khoản ?</p>
+                        <p id="signup"><a href="#">Đăng ký ngay</a></p>
+                        <p style="font-style: italic; font-size: 14px;">( Bạn có thể học mà không cần đăng nhập, tuy
+                            nhiên
+                            tiến
+                            trình học của bạn sẽ không được lưu lại nếu bạn tải lại trang )</p>
+                        <div class="google-login-button">
+                            <a href="google.com"> Đăng nhập bằng tài khoản Google</a>
+                            <img src="public/images/logo/gg.png" alt="Google">
+                        </div>
+                    </div>
+                </div>
+                <div class="signup-box">
+                    <h2>ĐĂNG KÝ</h2>
                     <div class="google-login-button">
-                        <a href="google.com"> Đăng nhập bằng tài khoản Google</a>
+                        <a href="google.com"> Đăng ký bằng tài khoản Google</a>
                         <img src="public/images/logo/gg.png" alt="Google">
                     </div>
-                </div>
-            </div>
-            <div class="signup-box">
-                <h2>ĐĂNG KÝ</h2>
-                <div class="google-login-button">
-                    <a href="google.com"> Đăng ký bằng tài khoản Google</a>
-                    <img src="public/images/logo/gg.png" alt="Google">
-                </div>
-                <form action="" method="post">
-                    <p>Tài khoản/email <span class="login-required-note">*</span></p>
-                    <input type="text" name="username" required>
-                    <p>Tên của bạn <span class="login-required-note">*</span></p>
-                    <input type="name" name="password" required>
-                    <p>Mật khẩu <span class="login-required-note">*</span></p>
-                    <input type="password" name="password" required>
-                    <button type="submit">Đăng ký</button>
-                </form>
-                <div class="signup-required">
-                    <div class="signup-choice">
+                    <form action="" method="post">
+                        <p>Tài khoản/email <span class="login-required-note">*</span></p>
+                        <input type="text" name="username" required>
+                        <p>Tên của bạn <span class="login-required-note">*</span></p>
+                        <input type="name" name="password" required>
+                        <p>Mật khẩu <span class="login-required-note">*</span></p>
+                        <input type="password" name="password" required>
+                        <button type="submit">Đăng ký</button>
+                    </form>
+                    <div class="signup-required">
+                        <div class="signup-choice">
 
+                        </div>
+                        <p>Tôi đồng ý với <a href="#">chính sách bảo mật </a>của hocAI <span
+                                class="login-required-note">*</span></p>
                     </div>
-                    <p>Tôi đồng ý với <a href="#">chính sách bảo mật </a>của hocAI <span
-                            class="login-required-note">*</span></p>
-                </div>
-                <div class="login-text">
-                    <p>Bạn đã có tài khoản ?</p>
-                    <p id="login"><a href="#">Quay lại đăng nhập</a></p>
+                    <div class="login-text">
+                        <p>Bạn đã có tài khoản ?</p>
+                        <p id="login"><a href="#">Quay lại đăng nhập</a></p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </section>
-    <!--FOOTER!-->
+        </section>
+    </main>
     <footer>
         <div class="main-container">
             <div class="footer-container">
@@ -131,7 +136,6 @@
             </div>
         </div>
     </footer>
-    <div class="transition-overlay"></div>
     <script src="public/js/sidebar.js"></script>
     <script src="public/js/login.js"></script>
     <script src="public/js/all.js"></script>

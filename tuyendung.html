@@ -4,13 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hocAI - Hướng dẫn giáo viên sử dụng công cụ AI</title>
+    <title> Tuyển dụng Hoc AI </title>
     <link rel="icon" type="image/png" href="public/images/logo/web.png">
-    <link rel="stylesheet" href="public/css/index.css">
     <link rel="stylesheet" href="public/css/headfoot.css">
     <link rel="stylesheet" href="public/css/all.css">
-    <link rel="stylesheet" href="css/chinhsachbaomat.css">
-    <link rel="stylesheet" href="css/tuyendung.css">
+    <link rel="stylesheet" href="public/css/tuyendung.css">
 </head>
 
 <body>
@@ -34,155 +32,166 @@
     <div class="scroll-to-top">
         <img src="public/images/logo/up.svg" alt="Scroll to top">
     </div>
-    <!-- THANH TÌM KIẾM !-->
-    <section class="search-bar">
-        <div class="search-bar-container">
-            <div class="left-search-box">
-                <p> Let's learn !!!</p>
-            </div>
-            <div class="search-box">
-                <img src="public/images/logo/search.svg">
-                <input type="text" placeholder="Tìm kiếm khoá học...">
+    <header>
+        <!-- THANH TÌM KIẾM !-->
+        <section class="search-bar">
+            <div class="search-bar-container">
+                <div class="left-search-box">
+                    <p> Let's learn !!!</p>
+                </div>
+                <div class="search-box">
+                    <img src="public/images/logo/search.svg">
+                    <input type="text" placeholder="Tìm kiếm khoá học...">
 
-            </div>
-            <div class="right-search-box">
-                <img src="public/images/logo/chatgpt.png" alt="ChatGPT">
-                <img src="public/images/logo/kahoot.png" alt="Kahoot">
-                <img src="public/images/logo/pp.png" alt="Powerpoint">
-            </div>
-        </div>
-    </section>
-    <!-- THANH CÔNG CỤ !-->
-    <section class="side-bar">
-        <div class="side-bar-container">
-            <div class="side-bar-logo">
-                <a href="index.html" class="link"><img src="public/images/logo/web.png" alt="logo"></a>
-            </div>
-            <div class="side-bar-menu">
-                <ul>
-                    <li><a href="index.html" class="link">TRANG CHỦ</a></li>
-                    <li><a href="gioithieu.html" class="link">GIỚI THIỆU hocAI</a></li>
-                    <li class="hasdropdown"><a>CHỌN KHOÁ HỌC</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" class="link">Ứng dụng trí tuệ nhân tạo ( ChatGPT, Deepseek, Grok,...)</a>
-                            </li>
-                            <li><a href="#" class="link">Kahoot ( Tạo trò chơi giáo dục )</a></li>
-                            <li><a href="#" class="link">Gammar AI ( Tạo slide tự động )</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="donggop.html" class="link">ĐÓNG GÓP</a></li>
-                </ul>
-            </div>
-            <div class="side-bar-toggle">
-                <svg width="20" height="20" viewBox="0 0 20 20">
-                    <rect width="20" height="2" y="3" class="line-1"></rect>
-                    <rect width="20" height="2" y="9" class="line-2"></rect>
-                    <rect width="20" height="2" y="9" class="line-3"></rect>
-                    <rect width="20" height="2" y="15" class="line-4"></rect>
-                </svg>
-            </div>
-            <div class="side-bar-login">
-                <a href="login.html" id="login-info" class="link">Đăng nhập</a>
-            </div>
-        </div>
-    </section>
-    <!--THÔNG TIN CÁ NHÂN!-->
-    <div id="userPopupOverlay" class="popup-overlay">
-        <div id="userInfoPopup" class="popup-container">
-            <div class="popup-header">
-                <h2>THÔNG TIN TÀI KHOẢN</h2>
-                <button id="closePopupBtn" class="popup-close-btn">&times;</button>
-            </div>
-            <div class="popup-content">
-                <p><strong>Tên người dùng:</strong> <span id="popup-username"></span></p>
-                <p><strong>Tài khoản:</strong> <span id="popup-account"></span></p>
-                <p><strong>Email:</strong> <span id="popup-email"></span></p>
-                <p><strong>Ngày tham gia:</strong> <span id="popup-logindate"></span></p>
-                <hr>
-                <p><strong>Khoá học của bạn:</strong></p>
-                <div id="popup-courses" class="popup-scrollable-content">
                 </div>
-                <div class="popup-edit">
-                    <button>Sửa</button>
+                <div class="right-search-box">
+                    <img src="public/images/logo/chatgpt.png" alt="ChatGPT">
+                    <img src="public/images/logo/kahoot.png" alt="Kahoot">
+                    <img src="public/images/logo/pp.png" alt="Powerpoint">
                 </div>
             </div>
+        </section>
+        <!-- THANH CÔNG CỤ !-->
+        <section class="side-bar">
+            <div class="side-bar-container">
+                <div class="side-bar-logo">
+                    <a href="index.html" class="link"><img src="public/images/logo/web.png" alt="logo"></a>
+                </div>
+                <div class="side-bar-menu">
+                    <ul>
+                        <li><a href="index.html" class="link">TRANG CHỦ</a></li>
+                        <li><a href="gioithieu.html" class="link">GIỚI THIỆU hocAI</a></li>
+                        <li class="hasdropdown"><a>CHỌN KHOÁ HỌC</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="tranghoc.html" class="link">Ứng dụng trí tuệ nhân tạo ( ChatGPT, Deepseek,
+                                        Grok,...)</a>
+                                </li>
+                                <li><a href="#" class="link">Kahoot ( Tạo trò chơi giáo dục )</a></li>
+                                <li><a href="#" class="link">Gammar AI ( Tạo slide tự động )</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="donggop.html" class="link">ĐÓNG GÓP</a></li>
+                    </ul>
+                </div>
+                <div class="side-bar-toggle">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <rect width="20" height="2" y="3" class="line-1"></rect>
+                        <rect width="20" height="2" y="9" class="line-2"></rect>
+                        <rect width="20" height="2" y="9" class="line-3"></rect>
+                        <rect width="20" height="2" y="15" class="line-4"></rect>
+                    </svg>
+                </div>
+                <div class="side-bar-login">
+                    <a href="login.html" id="login-info" class="link">Đăng nhập</a>
+                </div>
+            </div>
+        </section>
+        <!--THÔNG TIN CÁ NHÂN!-->
+        <div id="userPopupOverlay" class="popup-overlay">
+            <div id="userInfoPopup" class="popup-container">
+                <div class="popup-header">
+                    <h2>THÔNG TIN TÀI KHOẢN</h2>
+                    <button id="closePopupBtn" class="popup-close-btn">&times;</button>
+                </div>
+                <div class="popup-content">
+                    <p><strong>Tên người dùng:</strong> <span id="popup-username"></span></p>
+                    <p><strong>Tài khoản:</strong> <span id="popup-account"></span></p>
+                    <p><strong>Email:</strong> <span id="popup-email"></span></p>
+                    <p><strong>Ngày tham gia:</strong> <span id="popup-logindate"></span></p>
+                    <hr>
+                    <p><strong>Khoá học của bạn:</strong></p>
+                    <div id="popup-courses" class="popup-scrollable-content">
+                    </div>
+                    <div class="popup-edit">
+                        <button>Sửa</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <!--sửa toàn bộ class thành tiếng anh, tuân theo bắt buộc: phải chia section (class section là nội dung của phần đó) -> div container
-     của cả trang -> div container của riêng section-->
+    </header>
     <!--hinh tuyendung-->
-    <div class="hinh1">
-        <img src="public/images/td_gt/hinh1-tuyendung.png" alt="hinh1">
-    </div>
-    <div class="thongbao">
-        <h1> Hoc AI.com tuyển dụng Cộng tác viên </h1>
-        <h1> làm việc từ xa </h1>
-    </div>
-    <div class="noidung">
-        <h2>MÔ TẢ CÔNG VIỆC </h2>
-        <p>
-            Tuỳ vào vị trí, bạn sẽ đảm nhận một hoặc nhiều nhiệm vụ sau:
-        <ul>
-            <li>
-                -Viết bài nội dung cho website, fanpage, hoặc sản phẩm (theo form sẵn có)
-            </li>
-            <li>
-                -Hỗ trợ trả lời tin nhắn / email khách hàng (có kịch bản hỗ trợ)
-            </li>
-            <li>
-                -Tham gia đóng góp ý tưởng phát triển nội dung, chiến dịch truyền thông
-            </li>
-            <li>
-                -Làm các báo cáo công việc đơn giản theo tuần
-            </li>
-        </ul>
+    <section class="recruitment">
+        <div class="main-container">
+            <div class="recruitment-container">
 
-        </p>
-        <h2>
-            YÊU CẦU
-        </h2>
-        <P>
-        <ul>
-            <li>
-                -Có máy tính cá nhân, kết nối internet ổn định</li>
-            <li>
-                -Có kỹ năng giao tiếp tốt, biết dùng các công cụ văn phòng cơ bản (Google Docs, Excel, ...)</li>
-            <li>
-                -Có tinh thần tự giác, trách nhiệm trong công việc</li>
-            <li>
-                -Ưu tiên: sinh viên, người muốn làm thêm tại nhà, người có khả năng viết lách hoặc làm việc nhóm
-                online tốt</li>
-        </ul>
+                <div class="recruiment-image">
+                    <img src="public/images/td_gt/hinh1-tuyendung.png" alt="image">
+                </div>
+                <div class="recruiment-notification">
+                    <h1> Hoc AI.com tuyển dụng Cộng tác viên </h1>
+                    <h1> làm việc từ xa </h1>
+                </div>
+                <div class="recruiment-content">
+                    <h2>MÔ TẢ CÔNG VIỆC </h2>
+                    <p>
+                        Tuỳ vào vị trí, bạn sẽ đảm nhận một hoặc nhiều nhiệm vụ sau:
 
-        </P>
-        <h2>
-            QUYỀN LỢI
-        </h2>
-        <p>
-        <ul>
-            <li>
-                -Làm việc linh hoạt thời gian, không cần đến văn phòng</li>
-            <li>
-                -Được đào tạo trước khi làm chính thức</li>
-            <li>
-                -Cơ hội cộng tác lâu dài, phát triển lên nhân viên chính thức nếu phù hợp</li>
-            <li>
-                -Môi trường làm việc trẻ trung, hỗ trợ nhau nhiệt tình</li>
-        </ul>
-        </p>
-        <h2>
-            CÁCH ỨNG TUYỂN
-        </h2>
-        <P>
-            Gửi CV hoặc giới thiệu ngắn gọn về bản thân (bao gồm kinh nghiệm, kỹ năng, thời gian có thể làm) về
-            email:<span class="hightlight">Cong.PC231566@sis.hust.edu.vn </span>
-        </P>
-        <P>
-            Tiêu đề email: [Ứng tuyển CTV - Họ tên]
+                    <ul>
+                        <li>
+                            Viết bài nội dung cho website, fanpage, hoặc sản phẩm (theo form sẵn có)
+                        </li>
+                        <li>
+                            Hỗ trợ trả lời tin nhắn / email khách hàng (có kịch bản hỗ trợ)
+                        </li>
+                        <li>
+                            Tham gia đóng góp ý tưởng phát triển nội dung, chiến dịch truyền thông
+                        </li>
+                        <li>
+                            Làm các báo cáo công việc đơn giản theo tuần
+                        </li>
+                    </ul>
+
+                    </p>
+                    <h2>
+                        YÊU CẦU
+                    </h2>
+                    <P>
+                    <ul>
+                        <li>
+                            Có máy tính cá nhân, kết nối internet ổn định</li>
+                        <li>
+                            Có kỹ năng giao tiếp tốt, biết dùng các công cụ văn phòng cơ bản (Google Docs, Excel, ...)
+                        </li>
+                        <li>
+                            Có tinh thần tự giác, trách nhiệm trong công việc</li>
+                        <li>
+                            Ưu tiên: sinh viên, người muốn làm thêm tại nhà, người có khả năng viết lách hoặc làm việc
+                            nhóm
+                            online tốt</li>
+                    </ul>
+
+                    </P>
+                    <h2>
+                        QUYỀN LỢI
+                    </h2>
+                    <p>
+                    <ul>
+                        <li>
+                            Làm việc linh hoạt thời gian, không cần đến văn phòng</li>
+                        <li>
+                            Được đào tạo trước khi làm chính thức</li>
+                        <li>
+                            Cơ hội cộng tác lâu dài, phát triển lên nhân viên chính thức nếu phù hợp</li>
+                        <li>
+                            Môi trường làm việc trẻ trung, hỗ trợ nhau nhiệt tình</li>
+                    </ul>
+                    </p>
+                    <h2>
+                        CÁCH ỨNG TUYỂN
+                    </h2>
+                    <P>
+                        Gửi CV hoặc giới thiệu ngắn gọn về bản thân (bao gồm kinh nghiệm, kỹ năng, thời gian có thể làm)
+                        về
+                        email:<span class="hightlight">Cong.PC231566@sis.hust.edu.vn </span>
+                    </P>
+                    <P>
+                        Tiêu đề email: [Ứng tuyển CTV - Họ tên]
 
 
-        </p>
-    </div>
+                    </p>
+                </div>
+            </div>
+    </section>
     <!--FOOTER!-->
     <footer>
         <div class="main-container">
@@ -214,9 +223,7 @@
             </div>
         </div>
     </footer>
-    <div class="transition-overlay"></div>
     <script src="public/js/sidebar.js"></script>
-    <script src="public/js/index.js"></script>
     <script src="public/js/all.js"></script>
 </body>
 

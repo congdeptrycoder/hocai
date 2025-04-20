@@ -1,66 +1,73 @@
-.camon {
+.contribute-title  {
     background-color: #007ea7;
 }
 
-.camon h1 {
+.contribute-title h1 {
     color: #ffffff;
     text-align: center;
 
 }
 
-.nhungdonggop {
+.contribute-content-title {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset;
     margin-top: 100px;
 }
 
-.nhungdonggop h1 {
-    text-align-last: center;
+.contribute-content-title  h1 {
+    text-align: center;
 
 }
 
-.anhfb {
-    padding-left: 200px;
-    margin-top: 100px;
-    display: flex;
-    /* Xếp các ảnh theo chiều ngang */
-    justify-content: space-between;
-    /* Khoảng cách đều giữa các ảnh */
-    gap: 5px;
-    /* Khoảng cách giữa các ảnh */
-}
-
-.anhfb img {
-    width: 70%;
-    /* Kích thước mỗi ảnh chiếm 30% chiều rộng của vùng chứa */
-    height: auto;
-    /* Giữ tỷ lệ chiều cao và chiều rộng của ảnh */
+.contribute-content-image {
+    display: flex;               /* sắp xếp ngang */
+    justify-content: center;     /* căn giữa */
+   
+    gap: 60px ; 
+                /* khoảng cách giữa các ảnh */
 
 }
 
-.anhfb1 {
-    transform: rotate(-45deg);
-    /* Nghiêng ảnh 1 sang trái 45 độ */
-
+/* Cấu hình khung chứa từng ảnh */
+.image1, .image2, .image3 {
+    width: 30%;              /* Mỗi ảnh chiếm 30% chiều ngang */
+    max-width: 300px ;                         
 }
 
-.anhfb3 {
+/* Cấu hình riêng cho ảnh bên trong */
+.image1 img {
+    width: 100%;             /* Ảnh vừa với khung chứa */
+    transform: rotate(-45deg); /* Nghiêng trái */
+    margin-top : 100px ;     
+     margin-top : 200px ;  
+}
 
+.image2 img {
+    width: 100%;
+    transform: rotate(0deg);    /* Ảnh giữa không xoay */
+    margin-top : 100px ;  
+}
+
+.image3 img {
+    width: 100%;
     transform: rotate(45deg);
-    margin-top: 130px;
+       /* Nghiêng phải */
+       margin-top : 200px ;  
+    
 }
 
-.mongnhandonggop {
+
+.contribute-footer  {
     margin-top: 200px;
     text-align: center;
 
 }
 
-.guidonggop {box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset;
+.contribute-footer-content  {box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset;
     margin-top: 200px ; 
     display: flex;
-    /* Xếp các ảnh theo chiều ngang */
-    justify-content: space-between;}
-    /* Khoangcach đều */ 
+    border-radius: 50px ; 
+    
+}
       .send-button {
         background-color: #007ea7;/* Màu nền nút */
     color: white;
@@ -76,18 +83,22 @@
     cursor: pointer;
     /* Con trỏ chuột khi hover */
     transition: background-color 0.3s ease;
-    /* Hiệu ứng chuyển màu nền khi hover */
+
+    
+}
+.contribute-footer-content-send-button {
+    padding-left : 785px ; 
 }
 
 .send-button:hover {
     background-color: #0056b3;
     /* Màu nền khi di chuột qua */
 }
-.oguidonggop 
+.contribute-footer-content-box 
 { 
     font-size : 30px;
-    padding-left: 505px ; 
+    padding-left: 250px ; 
 }
-.main-container { 
-    margin-top : 300px; 
+.footer-container {
+    margin-top : 200px ; 
 }

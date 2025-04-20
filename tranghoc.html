@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hocAI - Hướng dẫn giáo viên sử dụng công cụ AI</title>
+  <link rel="icon" type="image/png" href="public/images/logo/web.png">
+  <link rel="stylesheet" href="public/css/tranghoc.css">
+  <link rel="stylesheet" href="public/css/headfoot.css">
+  <link rel="stylesheet" href="public/css/all.css">
+</head>
+<!--CHAT BUTTON-->
+<div class="chat-button" id="chatButton">
+  <img src="public/images/logo/chat.svg" alt="Chat">
+</div>
+<div class="chat-popup" id="chatPopup">
+  <div class="chat-header">
+    <span>Chat với hỗ trợ viên</span>
+    <button class="close-chat-btn" id="closeChat">&times;</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chatInput" placeholder="Nhập tin nhắn của bạn...">
+    <button id="sendChatBtn">Gửi</button>
+  </div>
+</div>
+<!--CUỘN LÊN ĐẦU TRANG-->
+<div class="scroll-to-top">
+  <img src="public/images/logo/up.svg" alt="Scroll to top">
+</div>
+<header>
+  <!-- THANH TÌM KIẾM !-->
+  <section class="search-bar">
+    <div class="search-bar-container">
+      <div class="left-search-box">
+        <p> Let's learn !!!</p>
+      </div>
+      <div class="search-box">
+        <img src="public/images/logo/search.svg">
+        <input type="text" placeholder="Tìm kiếm khoá học...">
+
+      </div>
+      <div class="right-search-box">
+        <img src="public/images/logo/chatgpt.png" alt="ChatGPT">
+        <img src="public/images/logo/kahoot.png" alt="Kahoot">
+        <img src="public/images/logo/pp.png" alt="Powerpoint">
+      </div>
+    </div>
+  </section>
+  <!-- THANH CÔNG CỤ !-->
+  <section class="side-bar">
+    <div class="side-bar-container">
+      <div class="side-bar-logo">
+        <a href="index.html" class="link"><img src="public/images/logo/web.png" alt="logo"></a>
+      </div>
+      <div class="side-bar-menu">
+        <ul>
+          <li><a href="index.html" class="link">TRANG CHỦ</a></li>
+          <li><a href="gioithieu.html" class="link">GIỚI THIỆU hocAI</a></li>
+          <li class="hasdropdown"><a>CHỌN KHOÁ HỌC</a>
+            <ul class="dropdown-menu">
+              <li><a href="#" class="link">Ứng dụng trí tuệ nhân tạo ( ChatGPT, Deepseek,
+                  Grok,...)</a>
+              </li>
+              <li><a href="#" class="link">Kahoot ( Tạo trò chơi giáo dục )</a></li>
+              <li><a href="#" class="link">Gammar AI ( Tạo slide tự động )</a></li>
+            </ul>
+          </li>
+          <li><a href="donggop.html" class="link">ĐÓNG GÓP</a></li>
+        </ul>
+      </div>
+      <div class="side-bar-toggle">
+        <svg width="20" height="20" viewBox="0 0 20 20">
+          <rect width="20" height="2" y="3" class="line-1"></rect>
+          <rect width="20" height="2" y="9" class="line-2"></rect>
+          <rect width="20" height="2" y="9" class="line-3"></rect>
+          <rect width="20" height="2" y="15" class="line-4"></rect>
+        </svg>
+      </div>
+      <div class="side-bar-login">
+        <a href="login.html" id="login-info" class="link">Đăng nhập</a>
+      </div>
+    </div>
+  </section>
+  <!--THÔNG TIN CÁ NHÂN!-->
+  <div id="userPopupOverlay" class="popup-overlay">
+    <div id="userInfoPopup" class="popup-container">
+      <div class="popup-header">
+        <h2>THÔNG TIN TÀI KHOẢN</h2>
+        <button id="closePopupBtn" class="popup-close-btn">&times;</button>
+      </div>
+      <div class="popup-content">
+        <p><strong>Tên người dùng:</strong> <span id="popup-username"></span></p>
+        <p><strong>Tài khoản:</strong> <span id="popup-account"></span></p>
+        <p><strong>Email:</strong> <span id="popup-email"></span></p>
+        <p><strong>Ngày tham gia:</strong> <span id="popup-logindate"></span></p>
+        <hr>
+        <p><strong>Khoá học của bạn:</strong></p>
+        <div id="popup-courses" class="popup-scrollable-content">
+        </div>
+        <div class="popup-edit">
+          <button>Sửa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="studysite">
+  <!--đặt tên main là nội dung trang, đặt tên section là nội dung section, nav,aside,... tương tự-->
+  <nav class="listlesson">
+    <h3>DANH SÁCH BÀI HỌC</h3>
+    <ul>
+      <li class="chapter">Chương 1: Giới thiệu</li>
+      <li class="item active">Bài 1: Giới thiệu về ChatGPT</li>
+      <li class="item">Bài 2: Đăng kí</li>
+      <li class="item">Bài 3: Đăng nhập</li>
+      <li class="chapter">Chương 2: Hướng dẫn sử dụng</li>
+      <li class="item">Bài 4: Cách đặt câu hỏi</li>
+      <li class="item">Bài 5: Cách tạo đề kiểm tra</li>
+      <li class="chapter">Chương 3: Deep Learning</li>
+    </ul>
+  </nav>
+
+  <section class="content">
+    <h2>Bài 1: Giới thiệu về ChatGPT</h2>
+    <div class="progress-bar">
+      <div class="progress" style="width: 70%;"></div>
+    </div>
+
+    <div class="video-wrapper">
+      <iframe width="100%" height="400" src="https://www.youtube.com/embed/gSjRW1TQsAM" title="Giới thiệu ChatGPT"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+
+    <h3>Giới thiệu về chat GPT</h3>
+    <p>ChatGPT là trợ lý ảo do OpenAI phát triển, có thể trò chuyện, trả lời câu hỏi, hỗ trợ học tập, viết nội dung,
+      dịch thuật và nhiều việc khác bằng ngôn ngữ tự nhiên.</p>
+
+    <div class="highlight-box">
+      <h4>Nội dung chính</h4>
+      <ul>
+        <li>Soạn giáo án và bài giảng tự động</li>
+        <li>Tạo đề thi và câu hỏi kiểm tra</li>
+        <li>Hỗ trợ thắc mắc 24/7</li>
+        <li>Gợi ý phương pháp giảng dạy sáng tạo</li>
+      </ul>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature green">
+        <div class="icon"></div>
+        <div class="text">
+          <strong>Tạo câu hỏi</strong>
+          <p>Tự động tạo các câu hỏi trắc nghiệm, tự luận với độ khó đa dạng.</p>
+        </div>
+      </div>
+      <div class="feature purple">
+        <div class="icon"></div>
+        <div class="text">
+          <strong>Soạn giáo án</strong>
+          <p>Chỉ cần mô tả chủ đề, ChatGPT sẽ soạn cho bạn giáo án sẵn sàng sử dụng.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn light">Bài trước</button>
+      <button class="btn primary" id="completeBtn">Hoàn thành bài học</button>
+      <button class="btn gray">Bài sau</button>
+    </div>
+
+    <div class="comment-section">
+      <h4>Thảo luận <span>12 bình luận</span></h4>
+      <textarea id="commentInput" placeholder="Thêm bình luận của bạn..."></textarea>
+      <button class="btn comment-btn" id="sendComment">Gửi</button>
+
+      <div class="comments" id="commentList">
+        <p><strong>Nguyễn Văn</strong><br>Bài giảng rất hữu ích! Mình đã áp dụng và tiết kiệm được rất nhiều thời gian.
+        </p>
+        <p><strong>Lê Thị</strong><br>Có ai đã thử dùng ChatGPT để tạo đề thi chưa? Mình muốn biết kết quả như thế nào.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="main-container">
+    <div class="footer-container">
+      <div class="footer-box">
+        <div class="footer-box1">
+          <img src="public/images/logo/web.png" alt="logo">
+        </div>
+        <div class="footer-box2">
+          <h3><a href="#" class="link">HƯỚNG DẪN SỬ DỤNG</a></h3>
+          <h3><a href="gioithieu.html" class="link">VỀ CHÚNG TÔI</a></h3>
+          <h3><a href="#" class="link">KHOÁ HỌC SỬ DỤNG CHATBOT AI</a></h3>
+          <h3><a href="#" class="link">KHOÁ HỌC TẠO BÀI TẬP SỐ</a></h3>
+          <h3><a href="#" class="link">KHOÁ HỌC TẠO SLIDE BẰNG AI</a></h3>
+        </div>
+        <div class="footer-box3">
+          <h3><a href="csbm.html" class="link">CHÍNH SÁCH BẢO MẬT</a></h3>
+          <h3><a href="#">PHẢN HỒI</a></h3>
+        </div>
+        <div class="footer-box4">
+          <h3><a href="tuyendung.html" class="link">TUYỂN DỤNG</a></h3>
+          <h3><a href="#">LIÊN HỆ</a></h3>
+          <a href="#"><img src="public/images/logo/tele.png" alt="Telegram"></a>
+          <a href="#"><img src="public/images/logo/fb.png" alt="Facebook"></a>
+
+        </div>
+      </div>
+      <p>© 2025 hocAI, HUST.</p>
+    </div>
+  </div>
+</footer>
+<script src="public/js/sidebar.js"></script>
+<script src="public/js/tranghoc.js"></script>
+<script src="public/js/all.js"></script>
+</body>
+
+</html>
