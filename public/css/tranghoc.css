@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+body {
+  will-change: auto !important;
+}
+
 /* MAIN LAYOUT */
 .studysite {
   display: flex;
@@ -197,6 +201,12 @@
 .btn.primary {
   background: #003459;
   color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn.primary:hover {
+  cursor: pointer;
+  background: #01485a;
 }
 
 .btn.light {
@@ -290,6 +300,119 @@
 .note {
   color: red;
 }
+
+/* Quizz test */
+.quiz-popup {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  /* overlay nền */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.quiz-popup .popup-content {
+  background: linear-gradient(to bottom, #f5f3ff, #fafaff);
+  padding: 2rem;
+  border-radius: 20px;
+  width: 80%;
+  max-width: 1166px;
+  height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  font-family: 'Inter', sans-serif;
+}
+
+.quiz-popup h3 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-popup form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.quiz-popup form p {
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-popup label {
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e2e8f0;
+  margin-top: 6px;
+  transition: all 0.2s ease;
+}
+
+.quiz-popup label.correct-answer {
+  background-color: #d1fae5;
+  /* Màu xanh lá nhạt */
+  border-color: #10b981;
+  /* Viền xanh lá đậm hơn */
+  color: #065f46;
+  /* Chữ màu xanh lá đậm */
+}
+
+.quiz-popup label.incorrect-user-answer {
+  background-color: #fee2e2;
+  /* Màu đỏ nhạt */
+  border-color: #f87171;
+  /* Viền đỏ đậm hơn */
+  color: #b91c1c;
+  /* Chữ màu đỏ đậm */
+  /* Có thể thêm gạch chân hoặc biểu tượng X nếu muốn */
+}
+
+.quiz-popup label:hover {
+  background: #f1f5f9;
+  cursor: pointer;
+}
+
+.quiz-popup input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  font-size: 14px;
+}
+
+.btn-submit {
+  background: linear-gradient(to right, #6366f1, #8b5cf6);
+  color: white;
+  font-weight: bold;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.question-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
 
 @media screen and (min-width: 800px) and (max-width: 1200px) {
 

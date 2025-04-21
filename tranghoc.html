@@ -108,7 +108,6 @@
   </div>
 </header>
 <main class="studysite">
-  <!--đặt tên main là nội dung trang, đặt tên section là nội dung section, nav,aside,... tương tự-->
   <nav class="listlesson">
     <h3>DANH SÁCH BÀI HỌC</h3>
     <ul>
@@ -187,6 +186,55 @@
       </div>
     </div>
   </section>
+  <!-- POPUP KIỂM TRA NHANH -->
+  <section class="popupquizz">
+    <div class="quiz-popup" id="quizPopup">
+      <div class="popup-content">
+        <h3>📝 Kiểm tra nhanh ( ô tròn là dạng câu hỏi chỉ chọn 1 đáp án đúng, ô vuông là dạng câu hỏi chọn 1 hoặc nhiều
+          đáp án
+          đúng )</h3>
+
+        <form>
+          <!-- Câu 1 -->
+          <div class="question-box">
+            <p>1. ChatGPT là sản phẩm của công ty nào?</p>
+            <ul class="answer-list">
+              <li><label><input type="radio" name="q1" value="Google"> Google</label></li>
+              <li><label><input type="radio" name="q1" value="OpenAI"> OpenAI</label></li>
+              <li><label><input type="radio" name="q1" value="Apple"> Apple</label></li>
+              <li><label><input type="radio" name="q1" value="Microsoft"> Microsoft</label></li>
+            </ul>
+          </div>
+
+          <!-- Câu 2 -->
+          <div class="question-box">
+            <p>2. Phiên bản miễn phí của ChatGPT có hạn chế gì?</p>
+            <ul class="answer-list">
+              <li><label><input type="checkbox" name="q2" value="1"> Không thể dùng vào giờ cao
+                  điểm</label></li>
+              <li><label><input type="checkbox" name="q2" value="2"> Chỉ trả lời câu đơn giản</label></li>
+              <li><label><input type="checkbox" name="q2" value="3"> Không lưu được lịch sử trò
+                  chuyện</label></li>
+            </ul>
+          </div>
+
+          <!-- Câu 3 -->
+          <div class="question-box">
+            <p>3. Điền vào chỗ trống: ChatGPT là viết tắt của...</p>
+            <input type="text" name="q3" placeholder="..."
+              style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc;">
+          </div>
+
+          <button type="submit" class="btn-submit">Nộp bài kiểm tra</button>
+          <div id="quizResult" style="display: none; margin-top: 1.5rem; text-align: center;">
+            <p id="quizScore" style="font-weight: bold; font-size: 18px;"></p>
+            <button type="button" id="finishQuizBtn" class="btn-submit" style="margin-top: 1rem;">Hoàn thành</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
 </main>
 <footer>
   <div class="main-container">
@@ -218,6 +266,7 @@
     </div>
   </div>
 </footer>
+
 <script src="public/js/sidebar.js"></script>
 <script src="public/js/tranghoc.js"></script>
 <script src="public/js/all.js"></script>
