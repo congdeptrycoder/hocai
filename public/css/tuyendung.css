@@ -4,6 +4,10 @@
 
 }
 
+.recruiment-image {
+    animation: 1s slideInFromLeft ease-out forwards;
+}
+
 .recruiment-notification {
     margin: 40px 0px;
     background-color: #f9f9f9;

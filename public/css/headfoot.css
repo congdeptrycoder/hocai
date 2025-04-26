@@ -519,6 +519,10 @@
         align-items: center;
     }
 
+    .footer-box h3:first-child {
+        padding-top: 20px;
+    }
+
     .footer-box1,
     .footer-box2,
     .footer-box3,

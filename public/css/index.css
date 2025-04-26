@@ -85,55 +85,6 @@
     padding: 0px 0px 10px;
 }
 
-/*Hiệu ứng cho pr box bay vào */
-@keyframes slideInFromLeft {
-    from {
-        transform: translateX(-100%);
-        /* Bắt đầu từ ngoài màn hình bên trái */
-        opacity: 0;
-        /* Bắt đầu ẩn */
-    }
-
-    to {
-        transform: translateX(0);
-        /* Kết thúc tại vị trí gốc */
-        opacity: 1;
-        /* Kết thúc hiển thị rõ */
-    }
-}
-
-@keyframes slideInFromMid {
-    from {
-        transform: translateY(100px);
-        /* Bắt đầu từ ngoài màn hình bên trái */
-        opacity: 0;
-        /* Bắt đầu ẩn */
-    }
-
-    to {
-        transform: translateY(0);
-        /* Kết thúc tại vị trí gốc */
-        opacity: 1;
-        /* Kết thúc hiển thị rõ */
-    }
-}
-
-@keyframes slideInFromRight {
-    from {
-        transform: translateX(100%);
-        /* Bắt đầu từ ngoài màn hình bên phải */
-        opacity: 0;
-        /* Bắt đầu ẩn */
-    }
-
-    to {
-        transform: translateX(0);
-        /* Kết thúc tại vị trí gốc */
-        opacity: 1;
-        /* Kết thúc hiển thị rõ */
-    }
-}
-
 /* pr section*/
 .pr-container {
     display: flex;

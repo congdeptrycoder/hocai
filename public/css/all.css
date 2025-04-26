@@ -74,6 +74,7 @@ h3 {
     transition: all 0.3s ease-in-out;
 }
 
+/*hiệu ứng động*/
 @keyframes laclu {
     from {
         transform: rotate(0deg);
@@ -91,6 +92,62 @@ h3 {
 
     to {
         transform: translateY(2px);
+    }
+}
+
+@keyframes slideInFromBottom {
+    from {
+        transform: translateY(100px);
+        opacity: 0
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        /* Bắt đầu từ ngoài màn hình bên trái */
+        opacity: 0;
+        /* Bắt đầu ẩn */
+    }
+
+    to {
+        transform: translateX(0);
+        /* Kết thúc tại vị trí gốc */
+        opacity: 1;
+        /* Kết thúc hiển thị rõ */
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+        /* Bắt đầu từ ngoài màn hình bên trái */
+        opacity: 0;
+        /* Bắt đầu ẩn */
+    }
+
+    to {
+        transform: translateX(0);
+        /* Kết thúc tại vị trí gốc */
+        opacity: 1;
+        /* Kết thúc hiển thị rõ */
     }
 }
 
@@ -256,37 +313,7 @@ h3 {
 
 }
 
-@keyframes slideInFromRight {
-    from {
-        transform: translateX(100%);
-        /* Bắt đầu từ ngoài màn hình bên trái */
-        opacity: 0;
-        /* Bắt đầu ẩn */
-    }
 
-    to {
-        transform: translateX(0);
-        /* Kết thúc tại vị trí gốc */
-        opacity: 1;
-        /* Kết thúc hiển thị rõ */
-    }
-}
-
-@keyframes slideInFromLeft {
-    from {
-        transform: translateX(-100%);
-        /* Bắt đầu từ ngoài màn hình bên trái */
-        opacity: 0;
-        /* Bắt đầu ẩn */
-    }
-
-    to {
-        transform: translateX(0);
-        /* Kết thúc tại vị trí gốc */
-        opacity: 1;
-        /* Kết thúc hiển thị rõ */
-    }
-}
 
 /*animation chuyển sang trang khác*/
 body {

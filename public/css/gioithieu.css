@@ -1,3 +1,7 @@
+.introduce-image1 {
+  animation: 1s slideInFromLeft ease-out forwards;
+}
+
 .introduce-image1 img {
   width: 100vw;
   height: auto;

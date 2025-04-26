@@ -182,37 +182,11 @@ button {
     width: auto;
 }
 
-@keyframes slideInFromBottom {
-    from {
-        transform: translateY(100px);
-        opacity: 0
-    }
 
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideInFromTop {
-    from {
-        transform: translateY(-100px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
 
 @media screen and (max-width: 799px) {
     .login-container h1 {
         font-size: 30px;
-    }
-
-    .footer-box h3:first-child {
-        padding-top: 20px;
     }
 
     .login-box.active,
