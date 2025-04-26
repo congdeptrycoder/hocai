@@ -113,9 +113,10 @@ body {
   border-radius: 10px;
   margin-bottom: 1.5rem;
 }
+
 .video-wrapper {
   border-radius: 30px;
-  overflow: hidden; 
+  overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
@@ -149,6 +150,7 @@ body {
   display: list-item;
   list-style-type: disc;
 }
+
 .section-title {
   font-size: 20px;
   font-weight: bold;
@@ -159,7 +161,8 @@ body {
 .section-divider {
   border: none;
   height: 1px;
-  background-color: #e2e8f0; /* màu xám nhạt giống figma */
+  background-color: #e2e8f0;
+  /* màu xám nhạt giống figma */
   margin: 8px 0 16px;
 }
 
@@ -241,15 +244,16 @@ body {
   background: #3b82f6;
   color: white;
 }
+
 .btn.light:hover,
 .btn.gray:hover {
-  background-color: rgba(51, 168, 191, 0.8); 
+  background-color: rgba(51, 168, 191, 0.8);
   cursor: pointer;
 }
 
 .btn.light:active,
 .btn.gray:active {
-  background-color: rgba(51, 168, 191, 0.9); 
+  background-color: rgba(51, 168, 191, 0.9);
 }
 
 /* COMMENT */
@@ -445,7 +449,7 @@ body {
 /*logo ChatGPT*/
 .chatgpt-strip {
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.08); 
+  background-color: rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid #e5e7eb;
   padding: 12px 0;
   display: flex;
@@ -470,103 +474,83 @@ body {
 
 @media screen and (min-width: 800px) and (max-width: 1200px) {
 
-    /* HEADER */
-    .header-container {
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      padding: 1rem;
-    }
-  
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-    }
-  
-    .user {
-      text-align: center;
-      font-size: 14px;
-    }
-  
-    /* MAIN LAYOUT */
-    .main-container,
-    .studysite {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      gap: 1.5rem;
-    }
-  
-    .listlesson {
-      width: 100%;
-      order: 1;
-      margin-bottom: 20px;
-      flex: none;
-    }
-  
-    .content {
-      width: 100%;
-      order: 2;
-      flex: none;
-    }
-  
-    /* FEATURE GRID */
-    .feature-grid {
-      flex-direction: column;
-      gap: 20px;
-    }
-  
-    .feature {
-      width: 100%;
-    }
-  
-    /* NAV BUTTONS */
-    .nav-buttons {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 10px;
-    }
-  
-    /* VIDEO */
-    .video-wrapper iframe {
-      width: 100%;
-      height: 220px;
-    }
-  
-    /* QUIZ POPUP */
-    .quiz-popup .popup-content {
-      width: 95%;
-      height: 90vh;
-      padding: 1rem;
-      border-radius: 16px;
-    }
-  
-    /* FOOTER */
-    .footer {
-      flex-direction: column;
-      gap: 20px;
-      align-items: center;
-      text-align: center;
-    }
-  
-    .footer-col {
-      width: 100%;
-    }
-  
-    .footer-col ul {
-      padding: 0;
-    }
-  
-    .footer-box2,
-    .footer-box3,
-    .footer-box4 {
-      margin-top: 1rem;
-    }
+  /* HEADER */
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem;
   }
-  
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .user {
+    text-align: center;
+    font-size: 14px;
+  }
+
+  /* MAIN LAYOUT */
+  .main-container,
+  .studysite {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .listlesson {
+    width: 100%;
+    order: 1;
+    margin-bottom: 20px;
+    flex: none;
+  }
+
+  .content {
+    width: 100%;
+    order: 2;
+    flex: none;
+  }
+
+  /* FEATURE GRID */
+  .feature-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .feature {
+    width: 100%;
+  }
+
+  /* NAV BUTTONS */
+  .nav-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  /* VIDEO */
+  .video-wrapper iframe {
+    width: 100%;
+    height: 220px;
+  }
+
+  /* QUIZ POPUP */
+  .quiz-popup .popup-content {
+    width: 95%;
+    height: 90vh;
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+}
+
 @media screen and (max-width: 799px) {
+
   /* Bố cục chính */
   .studysite {
     flex-direction: column;
@@ -631,23 +615,6 @@ body {
     height: 100px;
   }
 
-  /* Footer */
-  footer .footer-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1rem;
-  }
-
-  .footer-box {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer-box2, .footer-box3, .footer-box4 {
-    margin-top: 1rem;
-  }
-
   /* Popup quiz */
   .quiz-popup .popup-content {
     width: 95%;
@@ -670,4 +637,3 @@ body {
     padding: 10px;
   }
 }
-
