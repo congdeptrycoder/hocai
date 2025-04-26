@@ -27,52 +27,69 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // === Gửi bình luận ===
-  const sendBtn = document.getElementById("sendComment");
-  const commentInput = document.getElementById("commentInput");
-  const commentList = document.getElementById("commentList");
+  // Bình luận
+      // === Gửi bình luận ===
+    const sendBtn = document.getElementById("sendComment");
+    const commentInput = document.getElementById("commentInput");
+    const commentList = document.getElementById("commentList");
+    const commentCountEl = document.querySelector(".comment-section h4 span");
 
-  if (sendBtn && commentInput && commentList) {
-    sendBtn.addEventListener("click", () => {
-      const content = commentInput.value.trim();
-      if (content !== "") {
-        const p = document.createElement("p");
-        p.innerHTML = `<strong>Bạn</strong><br>${content}`;
-        commentList.appendChild(p);
-        commentInput.value = "";
+    // Hàm cập nhật số lượng bình luận
+    function updateCommentCount() {
+      const commentCount = commentList.querySelectorAll("p").length;
+      if (commentCountEl) {
+        commentCountEl.textContent = `${commentCount} bình luận`;
       }
-    });
-  }
+    }
+
+    // Gọi 1 lần khi trang vừa load
+    updateCommentCount();
+
+    if (sendBtn && commentInput && commentList) {
+      sendBtn.addEventListener("click", () => {
+        const content = commentInput.value.trim();
+        if (content !== "") {
+          const p = document.createElement("p");
+          p.innerHTML = `<strong>Bạn</strong><br>${content}`;
+          commentList.appendChild(p);
+          commentInput.value = "";
+
+          // Cập nhật số bình luận sau khi thêm
+          updateCommentCount();
+        }
+      });
+    }
+    
+
 
   // === Xử lý quizz ===
   /**
-    * Object lưu trữ đáp án đúng của tất cả câu hỏi
-    */
-  const correctAnswers = {
-    0: 'OpenAI',
-    1: ['1', '3'],
-    2: 'Generative Pre-trained Transformer'
+      * Object lưu trữ đáp án đúng của tất cả câu hỏi*/
+    const correctAnswers = {
+      0: 'OpenAI',
+      1: ['1', '3'],
+      2: 'Generative Pre-trained Transformer'
 
-  };
+    };
 
-  /**
-   * Hàm dành cho dạng câu nhiều đáp án
-   * @param {string} arr1  đáp án người dùng 
-   * @param {string} arr2  đáp án đúng 
-   */
-  function multiplechoice(arr1, arr2) {
-    if (arr1.length !== arr2.length) return false;
-    // Sắp xếp để so sánh không phụ thuộc thứ tự
-    const sortedArr1 = [...arr1].sort();
-    const sortedArr2 = [...arr2].sort();
-    for (let i = 0; i < sortedArr1.length; i++) {
-      if (sortedArr1[i] !== sortedArr2[i]) return false;
+    /**
+     * Hàm dành cho dạng câu nhiều đáp án
+     * @param {string} arr1  đáp án người dùng 
+     * @param {string} arr2  đáp án đúng 
+     */
+    function multiplechoice(arr1, arr2) {
+      if (arr1.length !== arr2.length) return false;
+      // Sắp xếp để so sánh không phụ thuộc thứ tự
+      const sortedArr1 = [...arr1].sort();
+      const sortedArr2 = [...arr2].sort();
+      for (let i = 0; i < sortedArr1.length; i++) {
+        if (sortedArr1[i] !== sortedArr2[i]) return false;
+      }
+      return true;
     }
-    return true;
-  }
-  /**
-  * Xử lý khi nhấn nút submit
-  */
+    /**
+    * Xử lý khi nhấn nút submit
+    */
   if (quizForm) {
     quizForm.addEventListener("submit", function (e) {
       e.preventDefault();

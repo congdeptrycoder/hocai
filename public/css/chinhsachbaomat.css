@@ -14,19 +14,20 @@
     max-width: 1440px;
     padding: 20px;
     background-color: #f9f9f9;
-    font-family: Arial, sans-serif;
+
     border-radius: 20px;
     box-shadow: -2px -2px 20px rgba(0, 0, 0, 0.25);
     overflow: visible;
     /* Đảm bảo không bị ẩn */
 }
+
 .policy-title {
     border-bottom: 2px solid #003459;
 }
 
 .policy-title h1 {
     text-align: center;
-    margin-top: 30px;
+    padding: 20px 0px;
     font-size: 60px;
 }
 
@@ -40,7 +41,7 @@ ol {
     /* Hiển thị số thứ tự */
     padding-left: 20px;
     /* Thêm khoảng cách bên trái để số không bị đè lên nội dung */
-    font-family: Arial, sans-serif;
+
     font-size: 20px;
     text-align: left;
 }
@@ -51,8 +52,83 @@ ol>li {
     padding-bottom: 10px;
 }
 
-.policy-content >ol >li > ul > li {
+.policy-content>ol>li>ul>li {
     list-style-type: disc !important;
     text-align: left;
     padding-bottom: 10px;
+}
+
+@media screen and (max-width: 799px) {
+    p {
+        font-size: 20px;
+    }
+
+    .policy {
+        height: auto;
+        justify-content: center;
+        /* Căn giữa ngang */
+
+    }
+
+    .policy-title h1 {
+        font-size: 30px;
+    }
+
+    .policy-container {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        /* 👈 Xếp các phần tử con theo chiều dọc */
+        gap: 20px;
+        /* Khoảng cách giữa các phần tử */
+        align-items: center;
+    }
+
+    .policy-container-box {
+        width: 80%;
+        max-width: 770px;
+        justify-content: center;
+        background-color: #f9f9f9;
+
+        border-radius: 20px;
+        box-shadow: -2px -2px 20px rgba(0, 0, 0, 0.25);
+        overflow: visible;
+    }
+
+
+
+}
+
+@media screen and (min-width: 800px) and (max-width: 1200px) {
+    p {
+        font-size: 20px;
+    }
+
+    .policy {
+        max-width: 1200px;
+        min-width: 800px;
+        justify-content: center;
+        /* Căn giữa ngang */
+
+    }
+
+
+    .policy-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+    }
+
+    .policy-container-box {
+        width: 80%;
+        max-width: 1100px;
+        background-color: #f9f9f9;
+        border-radius: 20px;
+        box-shadow: -2px -2px 20px rgba(0, 0, 0, 0.25);
+        overflow: visible;
+
+    }
+
 }
