@@ -1,0 +1,22 @@
+<div id="userPopupOverlay" class="popup-overlay">
+    <div id="userInfoPopup" class="popup-container">
+        <div class="popup-header">
+            <h2>THÔNG TIN TÀI KHOẢN</h2>
+            <button id="closePopupBtn" class="popup-close-btn">&times;</button>
+        </div>
+        <div class="popup-content">
+            <p><strong>Tên người dùng:</strong> <span id="popup-username"></span></p>
+            <p><strong>Tài khoản:</strong> <span id="popup-account"></span></p>
+            <p><strong>Email:</strong> <span id="popup-email"></span></p>
+            <p><strong>Ngày tham gia:</strong> <span id="popup-logindate"></span></p>
+            <hr>
+            <p><strong>Khoá học của bạn:</strong></p>
+            <div id="popup-courses" class="popup-scrollable-content">
+                {{! Content will be dynamically inserted here by JS }}
+            </div>
+            <div class="popup-edit">
+                <button>Sửa</button>
+            </div>
+        </div>
+    </div>
+</div>

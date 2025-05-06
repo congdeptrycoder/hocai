@@ -4,35 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập</title>
-    <link rel="icon" type="image/png" href="public/images/logo/web.png">
-    <link rel="stylesheet" href="public/css/headfoot.css">
-    <link rel="stylesheet" href="public/css/all.css">
-    <link rel="stylesheet" href="public/css/login.css">
+    <title>{{title}}</title>
+    <link rel="icon" type="image/png" href="/images/logo/web.png">
+    <link rel="stylesheet" href="/css/headfoot.css">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
     <header>
-        <!-- THANH CÔNG CỤ !-->
         <section class="side-bar">
             <div class="side-bar-container">
                 <div class="side-bar-logo">
-                    <a href="index.html" class="link"><img src="public/images/logo/web.png" alt="logo"></a>
+                    <a href="/" class="link"><img src="/images/logo/web.png" alt="logo"></a>
                 </div>
                 <div class="side-bar-menu">
                     <ul>
-                        <li><a href="index.html" class="link">TRANG CHỦ</a></li>
-                        <li><a href="gioithieu.html" class="link">GIỚI THIỆU hocAI</a></li>
+                        <li><a href="/" class="link">TRANG CHỦ</a></li>
+                        <li><a href="/gioithieu" class="link">GIỚI THIỆU hocAI</a></li>
                         <li class="hasdropdown"><a>CHỌN KHOÁ HỌC</a>
                             <ul class="dropdown-menu">
-                                <li><a href="tranghoc.html" class="link">Ứng dụng trí tuệ nhân tạo ( ChatGPT, Deepseek,
+                                <li><a href="/tranghoc" class="link">Ứng dụng trí tuệ nhân tạo ( ChatGPT, Deepseek,
                                         Grok,...)</a>
                                 </li>
                                 <li><a href="#" class="link">Kahoot ( Tạo trò chơi giáo dục )</a></li>
                                 <li><a href="#" class="link">Gammar AI ( Tạo slide tự động )</a></li>
                             </ul>
                         </li>
-                        <li><a href="donggop.html" class="link">ĐÓNG GÓP</a></li>
+                        <li><a href="/donggop" class="link">ĐÓNG GÓP</a></li>
                     </ul>
                 </div>
                 <div class="side-bar-toggle">
@@ -47,11 +46,10 @@
         </section>
     </header>
     <main>
-        <!--LOGIN FORM-->
         <section class="login">
 
             <div class="login-container">
-                <h1>Chào mừng bạn đến với,<img src="public/images/logo/web.png" alt="hocAI"></h1>
+                <h1>Chào mừng bạn đến với,<img src="/images/logo/web.png" alt="hocAI"></h1>
                 <div class="login-box active">
                     <h2>ĐĂNG NHẬP</h2>
                     <form action="" method="post">
@@ -71,7 +69,7 @@
                             trình học của bạn sẽ không được lưu lại nếu bạn tải lại trang )</p>
                         <div class="google-login-button">
                             <a href="google.com"> Đăng nhập bằng tài khoản Google</a>
-                            <img src="public/images/logo/gg.png" alt="Google">
+                            <img src="/images/logo/gg.png" alt="Google">
                         </div>
                     </div>
                 </div>
@@ -79,7 +77,7 @@
                     <h2>ĐĂNG KÝ</h2>
                     <div class="google-login-button">
                         <a href="google.com"> Đăng ký bằng tài khoản Google</a>
-                        <img src="public/images/logo/gg.png" alt="Google">
+                        <img src="/images/logo/gg.png" alt="Google">
                     </div>
                     <form action="" method="post">
                         <p>Tài khoản/email <span class="login-required-note">*</span></p>
@@ -92,9 +90,9 @@
                     </form>
                     <div class="signup-required">
                         <div class="signup-choice">
-
+                            {{!-- Checkbox or similar element --}}
                         </div>
-                        <p>Tôi đồng ý với <a href="#">chính sách bảo mật </a>của hocAI <span
+                        <p>Tôi đồng ý với <a href="/csbm">chính sách bảo mật </a>của hocAI <span
                                 class="login-required-note">*</span></p>
                     </div>
                     <div class="login-text">
@@ -111,35 +109,33 @@
             <div class="footer-container">
                 <div class="footer-box">
                     <div class="footer-box1">
-                        <img src="public/images/logo/web.png" alt="logo">
+                        <img src="/images/logo/web.png" alt="logo">
                     </div>
                     <div class="footer-box2">
                         <h3><a href="#" class="link">HƯỚNG DẪN SỬ DỤNG</a></h3>
-                        <h3><a href="gioithieu.html" class="link">VỀ CHÚNG TÔI</a></h3>
-                        <h3><a href="#" class="link">KHOÁ HỌC SỬ DỤNG CHATBOT AI</a></h3>
+                        <h3><a href="/gioithieu" class="link">VỀ CHÚNG TÔI</a></h3>
+                        <h3><a href="/tranghoc" class="link">KHOÁ HỌC SỬ DỤNG CHATBOT AI</a></h3>
                         <h3><a href="#" class="link">KHOÁ HỌC TẠO BÀI TẬP SỐ</a></h3>
                         <h3><a href="#" class="link">KHOÁ HỌC TẠO SLIDE BẰNG AI</a></h3>
                     </div>
                     <div class="footer-box3">
-                        <h3><a href="csbm.html" class="link">CHÍNH SÁCH BẢO MẬT</a></h3>
+                        <h3><a href="/csbm" class="link">CHÍNH SÁCH BẢO MẬT</a></h3>
                         <h3><a href="#">PHẢN HỒI</a></h3>
                     </div>
                     <div class="footer-box4">
-                        <h3><a href="tuyendung.html" class="link">TUYỂN DỤNG</a></h3>
+                        <h3><a href="/tuyendung" class="link">TUYỂN DỤNG</a></h3>
                         <h3><a href="#">LIÊN HỆ</a></h3>
-                        <a href="#"><img src="public/images/logo/tele.png" alt="Telegram"></a>
-                        <a href="#"><img src="public/images/logo/fb.png" alt="Facebook"></a>
-
+                        <a href="#"><img src="/images/logo/tele.png" alt="Telegram"></a>
+                        <a href="#"><img src="/images/logo/fb.png" alt="Facebook"></a>
                     </div>
                 </div>
                 <p>© 2025 hocAI, HUST.</p>
             </div>
         </div>
     </footer>
-    <script src="public/js/sidebar.js"></script>
-    <script src="public/js/login.js"></script>
-    <script src="public/js/all.js"></script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/all.js"></script>
 </body>
-
 
 </html>

@@ -2,9 +2,9 @@
 const choiceBoxes = document.querySelectorAll('.demo-box-choice');
 const demoImage = document.querySelector('.demo-image');
 const boxToImageMap = {
-    0: 'public/images/logo/demo1.png',
-    1: 'public/images/logo/demo2.png',
-    2: 'public/images/logo/demo3.png'
+    0: '/images/logo/demo1.png',
+    1: '/images/logo/demo2.png',
+    2: '/images/logo/demo3.png'
 };
 demoImage.innerHTML = '<p class="default-message">Hãy chọn để xem giao diện của chúng tôi</p>';
 choiceBoxes.forEach((box, index) => {
