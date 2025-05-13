@@ -1,3 +1,21 @@
+.error-message {
+    color: rgb(232, 105, 105);
+    background-color: #ffebee;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.success-message {
+    color: rgb(76, 175, 80);
+    background-color: #e8f5e9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
 .login-container {
     width: 98%;
     margin: auto;

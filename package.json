@@ -19,8 +19,14 @@
   },
   "homepage": "https://github.com/congdeptrycoder/hocai#readme",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "express-handlebars": "^8.0.1",
-    "express.js": "^1.0.0"
+    "express-mysql-session": "^3.0.3",
+    "express-session": "^1.18.1",
+    "express.js": "^1.0.0",
+    "googleapis": "^148.0.0",
+    "mysql2": "^3.14.1"
   }
 }

@@ -47,16 +47,24 @@
     </header>
     <main>
         <section class="login">
-
             <div class="login-container">
                 <h1>Chào mừng bạn đến với,<img src="/images/logo/web.png" alt="hocAI"></h1>
-                <div class="login-box active">
+
+                {{#if successMessage}}
+                <p class="success-message">{{successMessage}}</p>
+                {{/if}}
+                {{#if errorMessage}}
+                <p class="error-message">{{errorMessage}}</p>
+                {{/if}}
+
+                <div class="login-box {{#unless isRegistering}}active{{/unless}}">
                     <h2>ĐĂNG NHẬP</h2>
-                    <form action="" method="post">
-                        <p>Tài khoản/email <span class="login-required-note">*</span></p>
-                        <input type="text" name="username" required>
+                    <form action="/login" method="post">
+                        <p>Tài khoản/Email <span class="login-required-note">*</span></p>
+                        <input type="text" name="email" placeholder="Nhập tài khoản hoặc email" required
+                            value="{{formData.email}}">
                         <p>Mật khẩu <span class="login-required-note">*</span></p>
-                        <input type="password" name="password" required>
+                        <input type="password" name="password" placeholder="Nhập mật khẩu" required>
                         <button type="submit">Đăng nhập</button>
                     </form>
                     <div class="login-text">
@@ -64,44 +72,49 @@
                         <p>Bạn chưa có tài khoản ?</p>
                         <p id="signup"><a href="#">Đăng ký ngay</a></p>
                         <p style="font-style: italic; font-size: 14px;">( Bạn có thể học mà không cần đăng nhập, tuy
-                            nhiên
-                            tiến
-                            trình học của bạn sẽ không được lưu lại nếu bạn tải lại trang )</p>
+                            nhiên tiến trình học của bạn sẽ không được lưu lại nếu bạn tải lại trang )</p>
                         <div class="google-login-button">
-                            <a href="google.com"> Đăng nhập bằng tài khoản Google</a>
+                            <a href="/auth/google"> Đăng nhập bằng tài khoản Google</a>
                             <img src="/images/logo/gg.png" alt="Google">
                         </div>
                     </div>
                 </div>
-                <div class="signup-box">
+
+                <div class="signup-box {{#if isRegistering}}active{{/if}}">
                     <h2>ĐĂNG KÝ</h2>
                     <div class="google-login-button">
-                        <a href="google.com"> Đăng ký bằng tài khoản Google</a>
+                        <a href="/auth/google"> Đăng ký bằng tài khoản Google</a>
                         <img src="/images/logo/gg.png" alt="Google">
                     </div>
-                    <form action="" method="post">
-                        <p>Tài khoản/email <span class="login-required-note">*</span></p>
-                        <input type="text" name="username" required>
-                        <p>Tên của bạn <span class="login-required-note">*</span></p>
-                        <input type="name" name="password" required>
+                    <form action="/register" method="post">
+                        <p>Email <span class="login-required-note">*</span></p>
+                        <input type="email" name="email" placeholder="Email của bạn" required
+                            value="{{formData.email}}">
+                        <p>Tài khoản <span class="login-required-note">*</span></p>
+                        <input type="text" name="account" placeholder="Tài khoản (Không nhập ký tự đặc biệt)" required
+                            value="{{formData.account}}">
+                        <p>Tên hiển thị <span class="login-required-note">*</span></p>
+                        <input type="text" name="displayName" placeholder="Tên hiển thị trong thông tin của bạn"
+                            required value="{{formData.displayName}}">
                         <p>Mật khẩu <span class="login-required-note">*</span></p>
-                        <input type="password" name="password" required>
+                        <input type="password" name="password" placeholder="Mật khẩu ít nhất 6 ký tự" required>
+                        <p>Xác nhận mật khẩu <span class="login-required-note">*</span></p>
+                        <input type="password" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                        <div class="signup-required">
+                            <input type="checkbox" name="agreeTerms" class="signup-choice" id="agreeTerms" required>
+                            <label for="agreeTerms">Tôi đồng ý với <a href="/csbm" target="_blank">chính sách bảo
+                                    mật</a>
+                                của hocAI <span class="login-required-note">*</span></label>
+                        </div>
                         <button type="submit">Đăng ký</button>
                     </form>
-                    <div class="signup-required">
-                        <div class="signup-choice">
-                            {{!-- Checkbox or similar element --}}
-                        </div>
-                        <p>Tôi đồng ý với <a href="/csbm">chính sách bảo mật </a>của hocAI <span
-                                class="login-required-note">*</span></p>
-                    </div>
+
                     <div class="login-text">
                         <p>Bạn đã có tài khoản ?</p>
                         <p id="login"><a href="#">Quay lại đăng nhập</a></p>
                     </div>
                 </div>
             </div>
-
         </section>
     </main>
     <footer>

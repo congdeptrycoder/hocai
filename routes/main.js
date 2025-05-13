@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+//Chuyển hướng các trang
 router.get('/', (req, res) => {
     res.render('index', { title: 'hocAI - Hướng dẫn giáo viên sử dụng công cụ AI', css: 'index', js: 'index' });
 });
@@ -19,10 +20,6 @@ router.get('/tuyendung', (req, res) => {
 
 router.get('/donggop', (req, res) => {
     res.render('donggop', { title: 'Đóng góp Hoc AI', css: 'donggop' });
-});
-
-router.get('/login', (req, res) => {
-    res.render('login', { layout: false, title: 'Đăng nhập', css: 'login', js: 'login' });
 });
 
 router.get('/tranghoc', (req, res) => {

@@ -28,95 +28,126 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-});
-document.addEventListener('DOMContentLoaded', function () {
+    const loginInfoLink = document.getElementById('login-info');
+    const logoutButton = document.getElementById('logoutButtonFromPopup');
+    const userPopupOverlay = document.getElementById('userPopupOverlay');
+    const userInfoPopupContainer = document.getElementById('userInfoPopup'); // Đổi tên biến để rõ hơn
+    const closePopupBtn = document.getElementById('closePopupBtn');
+    const bodyElement = document.body;
 
-    // const logininfo = document.getElementById('login-info');
-    // const popupOverlay = document.getElementById('userPopupOverlay');
-    // const userInfoPopup = document.getElementById('userInfoPopup');
-    // const closePopupBtn = document.getElementById('closePopupBtn');
-    // const bodyElement = document.body; // Lấy tham chiếu đến thẻ body
+    const popupUsername = document.getElementById('popup-username');
+    const popupAccount = document.getElementById('popup-account');
+    const popupEmail = document.getElementById('popup-email');
+    const popupLoginDate = document.getElementById('popup-logindate');
+    const popupCourses = document.getElementById('popup-courses');
 
-    // const usernameSpan = document.getElementById('popup-username');
-    // const accountSpan = document.getElementById('popup-account');
-    // const emailSpan = document.getElementById('popup-email');
-    // const loginDateSpan = document.getElementById('popup-logindate');
-    // const coursesDiv = document.getElementById('popup-courses');
+    async function fetchAndShowUserInfo() {
+        try {
+            const response = await fetch('/api/user/current');
+            if (response.ok) {
+                const userData = await response.json();
+                if (userData && userData.username) {
+                    loginInfoLink.textContent = `Xin chào, ${userData.username}`;
+                    loginInfoLink.removeAttribute('href'); // Xóa href="/login"
+                    loginInfoLink.style.cursor = 'pointer'; // Đổi con trỏ để biết là có thể click
 
-    // // --- Dữ liệu demo ---
-    // const demoUserData = {
-    //     username: "Top1BachKhoa",
-    //     account: "top1_bachkhoa",
-    //     email: "top1_bachkhoa@hust.edu.vn",
-    //     courses: [
-    //         "Ứng dụng trí tuệ nhân tạo (ChatGPT,...) - Bài 2",
-    //         "Kahoot (Tạo trò chơi giáo dục) - Bài 2",
-    //         "Gammar AI (Tạo slide tự động) - Hoàn thành"
-    //     ]
-    // };
+                    // Gán sự kiện click để mở popup CHỈ KHI đã đăng nhập
+                    loginInfoLink.onclick = function (event) { // Sử dụng onclick để dễ dàng gỡ bỏ hoặc thay đổi
+                        event.preventDefault();
+                        // Điền thông tin vào popup trước khi hiển thị
+                        if (popupUsername) popupUsername.textContent = userData.username;
+                        if (popupAccount) popupAccount.textContent = userData.account || 'N/A';
+                        if (popupEmail) popupEmail.textContent = userData.email;
+                        if (popupLoginDate) popupLoginDate.textContent = userData.time_create;
+                        // TODO: Lấy và hiển thị khóa học (nếu có)
+                        if (popupCourses) popupCourses.innerHTML = '<ul><li>Bạn chưa đăng ký khóa học nào.</li></ul>';
 
-    // // --- Hàm để hiển thị popup ---
-    // function showPopup() {
-    //     // 1. Điền dữ liệu vào popup (giữ nguyên như trước)
-    //     usernameSpan.textContent = demoUserData.username;
-    //     accountSpan.textContent = demoUserData.account;
-    //     emailSpan.textContent = demoUserData.email;
-    //     const now = new Date();
-    //     const formattedDate = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()} ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
-    //     loginDateSpan.textContent = formattedDate;
+                        showUserPopup();
+                    };
+                } else { // Trường hợp API trả về OK nhưng không có userData.username (ít xảy ra)
+                    setLoginLinkDefault();
+                }
+            } else if (response.status === 401) { // Chưa đăng nhập
+                setLoginLinkDefault();
+            } else { // Lỗi khác từ API
+                console.error('API error:', response.status, await response.text());
+                setLoginLinkDefault();
+            }
+        } catch (error) {
+            console.error('Lỗi khi lấy thông tin người dùng:', error);
+            setLoginLinkDefault();
+        }
+    }
 
-    //     let coursesHtml = '<ul>';
-    //     if (demoUserData.courses && demoUserData.courses.length > 0) {
-    //         demoUserData.courses.forEach(course => {
-    //             coursesHtml += `<li>${course}</li>`;
-    //         });
-    //     } else {
-    //         coursesHtml += '<li>Bạn chưa đăng ký khóa học nào.</li>';
-    //     }
-    //     coursesHtml += '</ul>';
-    //     coursesDiv.innerHTML = coursesHtml;
+    function setLoginLinkDefault() {
+        loginInfoLink.textContent = 'Đăng nhập';
+        loginInfoLink.setAttribute('href', '/login');
+        loginInfoLink.style.cursor = '';
+        loginInfoLink.onclick = null;
+    }
 
-    //     // --- Ngăn cuộn trang chính ---
-    //     // Tính độ rộng thanh cuộn (để tránh dịch chuyển layout)
-    //     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    function showUserPopup() {
+        if (userPopupOverlay && userInfoPopupContainer) {
+            userPopupOverlay.classList.add('active');
+            bodyElement.style.overflow = 'hidden';
+        }
+    }
 
+    function hideUserPopup() {
+        if (userPopupOverlay) {
+            userPopupOverlay.classList.remove('active');
+            bodyElement.style.overflow = '';
+        }
+    }
 
+    if (loginInfoLink) {
+        fetchAndShowUserInfo(); // Gọi khi trang tải xong
+    }
 
-    //     bodyElement.style.overflow = 'hidden';
+    if (closePopupBtn) {
+        closePopupBtn.addEventListener('click', hideUserPopup);
+    }
 
-    //     popupOverlay.classList.add('active');
-    // }
+    if (userPopupOverlay) {
+        userPopupOverlay.addEventListener('click', function (event) {
+            // Đóng popup chỉ khi click vào overlay, không phải vào content của popup
+            if (event.target === userPopupOverlay) {
+                hideUserPopup();
+            }
+        });
+    }
 
-    // function hidePopup() {
-    //     bodyElement.style.overflow = '';
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && userPopupOverlay && userPopupOverlay.classList.contains('active')) {
+            hideUserPopup();
+        }
+    });
+    if (logoutButton) {
+        logoutButton.addEventListener('click', async function () {
+            try {
+                // Sử dụng fetch để gửi yêu cầu POST đến /logout
+                const response = await fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                        // Thêm các header cần thiết nếu có, ví dụ CSRF token
+                        // 'Content-Type': 'application/json' // Không cần cho POST rỗng
+                    }
+                });
 
-    //     popupOverlay.classList.remove('active');
-    // }
-
-    // // --- Gán sự kiện (giữ nguyên như trước) ---
-    // if (logininfo) {
-    //     logininfo.addEventListener('click', function (event) {
-    //         event.preventDefault();
-    //         showPopup();
-    //     });
-    // }
-
-    // if (closePopupBtn) {
-    //     closePopupBtn.addEventListener('click', hidePopup);
-    // }
-
-    // if (popupOverlay) {
-    //     popupOverlay.addEventListener('click', function (event) {
-    //         if (event.target === popupOverlay) {
-    //             hidePopup();
-    //         }
-    //     });
-    // }
-
-    // document.addEventListener('keydown', function (event) {
-    //     if (event.key === 'Escape' && popupOverlay.classList.contains('active')) {
-    //         hidePopup();
-    //     }
-    // });
-
+                if (response.ok) {
+                    // Nếu server trả về redirect, trình duyệt sẽ tự động theo sau
+                    // Hoặc nếu server trả về JSON success, bạn có thể redirect ở đây
+                    console.log('Đăng xuất thành công, đang chuyển hướng...');
+                    window.location.href = '/'; // Đảm bảo chuyển hướng về trang chủ
+                } else {
+                    // Xử lý lỗi nếu có từ server
+                    console.error('Lỗi đăng xuất:', response.status, await response.text());
+                    alert('Đăng xuất không thành công. Vui lòng thử lại.');
+                }
+            } catch (error) {
+                console.error('Lỗi khi gửi yêu cầu đăng xuất:', error);
+                alert('Đã xảy ra lỗi. Vui lòng thử lại.');
+            }
+        });
+    }
 });

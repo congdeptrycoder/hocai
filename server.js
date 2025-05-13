@@ -1,11 +1,83 @@
+require('dotenv').config();
 const express = require('express');
 const { engine } = require('express-handlebars');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 const path = require('path');
 const mainRouter = require('./routes/main');
+const authRouter = require('./routes/authRoutes');
+const mysql = require('mysql2/promise');
+const dbConfig = require('./config/db');
 
 const app = express();
 const port = 3000;
 
+// Kiểm tra kết nối cơ sở dữ liệu
+const pool = mysql.createPool({
+    host: dbConfig.HOST,
+    user: dbConfig.USER,
+    password: dbConfig.PASSWORD,
+    database: dbConfig.DB,
+    port: dbConfig.PORT,
+    waitForConnections: true,
+    connectionLimit: dbConfig.pool.max,
+    queueLimit: 0
+});
+// --- Cấu hình Session Store với MySQL ---
+const sessionStoreOptions = {
+    host: dbConfig.HOST,
+    port: dbConfig.PORT,
+    user: dbConfig.USER,
+    password: dbConfig.PASSWORD,
+    database: dbConfig.DB,
+    clearExpired: true, // Tự động xóa các session đã hết hạn
+    checkExpirationInterval: 900000, // Tần suất kiểm tra session hết hạn (ví dụ: 15 phút)
+    expiration: 24 * 60 * 60 * 1000, // Thời gian sống của session (ví dụ: 1 ngày), giống maxAge của cookie
+    createDatabaseTable: true, // Tự động tạo bảng 'sessions' nếu chưa có
+    schema: {
+        tableName: 'sessions', // Tên bảng để lưu session
+        columnNames: {
+            session_id: 'session_id',
+            expires: 'expires',
+            data: 'data'
+        }
+    }
+};
+const sessionStore = new MySQLStore(sessionStoreOptions);
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'your_super_secret_key_hocai_db_session',
+    store: sessionStore, // <<< SỬ DỤNG MYSQL STORE
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // Phải khớp với 'expiration' của sessionStore
+    }
+}));
+pool.getConnection((err, connection) => {
+    if (err) {
+        console.error('Lỗi kết nối đến MySQL:', err.stack);
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            console.error('Database connection was closed.');
+        }
+        if (err.code === 'ER_CON_COUNT_ERROR') {
+            console.error('Database has too many connections.');
+        }
+        if (err.code === 'ECONNREFUSED') {
+            console.error('Database connection was refused.');
+        }
+        return;
+    }
+    if (connection) {
+        console.log('Đã kết nối thành công đến MySQL với ID ' + connection.threadId);
+        connection.release(); // Trả connection về pool sau khi kiểm tra
+    }
+});
+app.use((req, res, next) => {
+    req.db = pool; // Gán pool vào req.db
+    next();
+});
 app.engine('hbs', engine({
     extname: '.hbs',
     defaultLayout: 'main',
@@ -16,36 +88,26 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use('/', mainRouter);
-app.get('/', (req, res) => {
-    res.render('index', { title: 'hocAI - Hướng dẫn giáo viên sử dụng công cụ AI', css: 'index', js: 'index' });
-});
+app.use('/', authRouter);
 
-app.get('/gioithieu', (req, res) => {
-    res.render('gioithieu', { title: 'Giới Thiệu Hoc AI', css: 'gioithieu', });
-});
-
-app.get('/csbm', (req, res) => {
-    res.render('csbm', { title: 'Chính sách bảo mật', css: 'chinhsachbaomat', });
-});
-
-app.get('/tuyendung', (req, res) => {
-    res.render('tuyendung', { title: 'Tuyển dụng Hoc AI', css: 'tuyendung', });
-});
-
-app.get('/donggop', (req, res) => {
-    res.render('donggop', {
-        title: 'Đóng góp Hoc AI', css: 'donggop'
-    });
-});
-
-app.get('/login', (req, res) => {
-    res.render('login', { layout: false, title: 'Đăng nhập', css: 'login', js: 'login' }); // Ví dụ: render không dùng layout chính
-});
-
-app.get('/tranghoc', (req, res) => {
-    res.render('tranghoc', { title: 'Khóa học AI - hocAI', css: 'tranghoc', js: 'tranghoc' }); // Truyền title
-});
+global.generateRandomPassword = function () {
+    const numbers = '0123456789';
+    const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const specialChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    let password = '';
+    for (let i = 0; i < 6; i++) {
+        password += numbers.charAt(Math.floor(Math.random() * numbers.length));
+    }
+    for (let i = 0; i < 5; i++) {
+        password += letters.charAt(Math.floor(Math.random() * letters.length));
+    }
+    password += specialChars.charAt(Math.floor(Math.random() * specialChars.length));
+    return password.split('').sort(() => 0.5 - Math.random()).join('');
+};
 
 app.listen(port, () => {
     console.log(`Server đang chạy tại http://localhost:${port}`);
