@@ -52,16 +52,37 @@ document.addEventListener('DOMContentLoaded', function () {
                     loginInfoLink.style.cursor = 'pointer'; // Đổi con trỏ để biết là có thể click
 
                     // Gán sự kiện click để mở popup CHỈ KHI đã đăng nhập
-                    loginInfoLink.onclick = function (event) { // Sử dụng onclick để dễ dàng gỡ bỏ hoặc thay đổi
+                    loginInfoLink.onclick = async function (event) { // Sử dụng onclick để dễ dàng gỡ bỏ hoặc thay đổi
                         event.preventDefault();
                         // Điền thông tin vào popup trước khi hiển thị
                         if (popupUsername) popupUsername.textContent = userData.username;
                         if (popupAccount) popupAccount.textContent = userData.account || 'N/A';
                         if (popupEmail) popupEmail.textContent = userData.email;
                         if (popupLoginDate) popupLoginDate.textContent = userData.time_create;
-                        // TODO: Lấy và hiển thị khóa học (nếu có)
-                        if (popupCourses) popupCourses.innerHTML = '<ul><li>Bạn chưa đăng ký khóa học nào.</li></ul>';
-
+                        // Lấy và hiển thị khóa học
+                        if (popupCourses) {
+                            popupCourses.innerHTML = '<div>Đang tải...</div>';
+                            try {
+                                const res = await fetch('/api/user/courses');
+                                if (res.ok) {
+                                    const data = await res.json();
+                                    if (data.courses && data.courses.length > 0) {
+                                        let html = '<ul>';
+                                        data.courses.forEach(c => {
+                                            html += `<li>${c.name_course} - ${c.lesson}</li>`;
+                                        });
+                                        html += '</ul>';
+                                        popupCourses.innerHTML = html;
+                                    } else {
+                                        popupCourses.innerHTML = '<ul><li>Bạn chưa chọn khoá học nào.</li></ul>';
+                                    }
+                                } else {
+                                    popupCourses.innerHTML = '<ul><li>Lỗi khi lấy khoá học.</li></ul>';
+                                }
+                            } catch (err) {
+                                popupCourses.innerHTML = '<ul><li>Lỗi khi lấy khoá học.</li></ul>';
+                            }
+                        }
                         showUserPopup();
                     };
                 } else { // Trường hợp API trả về OK nhưng không có userData.username (ít xảy ra)

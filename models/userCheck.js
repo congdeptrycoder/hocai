@@ -23,7 +23,7 @@ async function createUser(db, userData) {
     );
     await db.query(
         'INSERT INTO user_course (email, roadmap) VALUES (?, ?)',
-        [email, 'cb0kh0gm0']
+        [email, 'cbc0khc0gmc0']
     );
     return result.insertId;
 }
@@ -39,10 +39,54 @@ async function findUserByAccount(db, account) {
     return users.length > 0 ? users[0] : null;
 }
 
+// Lấy roadmap của user
+async function getUserRoadmap(db, email) {
+    const [rows] = await db.query('SELECT roadmap FROM user_course WHERE email = ?', [email]);
+    return rows.length > 0 ? rows[0].roadmap : null;
+}
+
+// Lấy danh sách khoá học và bài học đang học của user
+async function getUserCoursesProgress(db, email) {
+    // Lấy roadmap tổng
+    const [roadmapRows] = await db.query('SELECT roadmap FROM user_course WHERE email = ?', [email]);
+    if (!roadmapRows.length) return [];
+    const roadmapStr = roadmapRows[0].roadmap;
+    // Lấy danh sách khoá học
+    const [courses] = await db.query('SELECT id_course, name_course FROM course_list');
+    const result = [];
+    for (const course of courses) {
+        const tag = course.id_course;
+        const firstIdx = roadmapStr.indexOf(tag);
+        if (firstIdx === -1) continue;
+        const secondIdx = roadmapStr.indexOf(tag, firstIdx + tag.length);
+        if (secondIdx === -1) continue;
+        const courseRoadmap = roadmapStr.substring(firstIdx + tag.length, secondIdx);
+        const lessonIndex = parseInt(courseRoadmap);
+        if (!lessonIndex || lessonIndex === 0) continue;
+        // Lấy name_lesson đang học
+        const [lessonRows] = await db.query(
+            'SELECT name_lesson FROM lesson_name WHERE id_course = ? ORDER BY id_lesson ASC',
+            [tag]
+        );
+        let lessonName = '';
+        if (lessonRows.length >= lessonIndex) {
+            lessonName = lessonRows[lessonIndex - 1].name_lesson;
+        }
+        result.push({
+            id_course: tag,
+            name_course: course.name_course,
+            lesson: lessonName
+        });
+    }
+    return result;
+}
+
 module.exports = {
     findUserByEmail,
     findUserDetailsByEmail,
     createUser,
     updateUserGoogleId,
     findUserByAccount,
+    getUserRoadmap,
+    getUserCoursesProgress,
 };

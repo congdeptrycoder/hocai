@@ -155,6 +155,11 @@ router.post('/login', async (req, res) => {
                 userId: userfind.email,
                 username: userfind.username
             };
+            // Lấy roadmap từ user_course và lưu vào session (dùng model)
+            const roadmap = await userModel.getUserRoadmap(db, userfind.email);
+            if (roadmap) {
+                req.session.roadmap = roadmap;
+            }
             req.session.save(err => {
                 if (err) {
                     console.error("Lỗi khi lưu session:", err);
@@ -273,7 +278,12 @@ router.get('/auth/google/callback', async (req, res) => {
             userId: userRecordForSession.email,
             username: userRecordForSession.username
         };
-        console.log('Session created/updated:', req.session); // Debug session
+        // Lấy roadmap từ user_course và lưu vào session (dùng model)
+        const roadmap = await userModel.getUserRoadmap(db, userRecordForSession.email);
+        if (roadmap) {
+            req.session.roadmap = roadmap;
+        }
+        console.log('Session created/updated:', req.session);
 
         req.session.save(err => {
             if (err) {
@@ -342,6 +352,22 @@ router.post('/logout', (req, res, next) => { // Sử dụng POST
     } else {
         // Không có session, chỉ chuyển hướng về trang chủ
         res.redirect('/');
+    }
+});
+
+// API lấy danh sách khoá học và bài học đang học của user
+router.get('/api/user/courses', async (req, res) => {
+    if (!req.session || !req.session.user || !req.session.user.userId) {
+        return res.status(401).json({ message: 'Chưa đăng nhập' });
+    }
+    try {
+        const db = req.db;
+        const email = req.session.user.userId;
+        const courses = await userModel.getUserCoursesProgress(db, email);
+        res.json({ courses });
+    } catch (err) {
+        console.error('Lỗi lấy danh sách khoá học:', err);
+        res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 });
 
