@@ -250,12 +250,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
                 const data = await res.json();
                 if (data.success) {
-                  // Tìm bài học tiếp theo
-                  const nextItem = document.querySelector(`.item[data-stt='${stt + 1}']`);
-                  if (nextItem) {
-                    location.reload();
+                  if (data.updated) {
+                    // Đã cập nhật, chuyển sang bài tiếp theo như cũ
+                    const nextItem = document.querySelector(`.item[data-stt='${stt + 1}']`);
+                    if (nextItem) {
+                      location.reload();
+                      quizzPopup.style.display = 'none';
+                    } else {
+                      alert('Đã hoàn thành khoá học');
+                      quizzPopup.style.display = 'none';
+                    }
                   } else {
-                    alert('Đã hoàn thành khoá học');
+                    // Không cập nhật (học lại bài cũ), chỉ đóng popup và có thể báo cho user
+                    alert('Bạn đã hoàn thành bài học này trước đó!');
                     quizzPopup.style.display = 'none';
                   }
                 } else {
@@ -457,7 +464,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const percent = Math.round((stt / total) * 100);
       progress.style.width = percent + '%';
       // Hiển thị tỉ lệ trong progress-bar
-      let ratioSpan = progressBar.querySelector('.progress-ratio');
+      let ratioSpan = document.querySelector('.progress-ratio');
       ratioSpan.textContent = `${stt}/${total}`;
     }
   }

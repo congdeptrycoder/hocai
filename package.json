@@ -27,6 +27,7 @@
     "express-session": "^1.18.1",
     "express.js": "^1.0.0",
     "googleapis": "^148.0.0",
-    "mysql2": "^3.14.1"
+    "mysql2": "^3.14.1",
+    "natural": "^6.10.4"
   }
 }

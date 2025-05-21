@@ -8,6 +8,7 @@ const mainRouter = require('./routes/main');
 const authRouter = require('./routes/authRoutes');
 const mysql = require('mysql2/promise');
 const dbConfig = require('./config/db');
+const chatRouter = require('./routes/chat');
 
 const app = express();
 const port = 3000;
@@ -93,6 +94,7 @@ app.use(express.json());
 
 app.use('/', mainRouter);
 app.use('/', authRouter);
+app.use('/chat', chatRouter);
 
 global.generateRandomPassword = function () {
     const numbers = '0123456789';

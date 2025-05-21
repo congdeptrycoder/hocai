@@ -59,13 +59,13 @@ document.addEventListener('DOMContentLoaded', function () {
     //Box chat
     const chatButton = document.getElementById('chatButton');
     const chatPopup = document.getElementById('chatPopup');
-    const closeChatBtn = document.getElementById('closeChat');
-    const chatMessages = document.getElementById('chatMessages');
+    
+    const closeChat = document.getElementById('closeChat');
     const chatInput = document.getElementById('chatInput');
     const sendChatBtn = document.getElementById('sendChatBtn');
+    const chatMessages = document.getElementById('chatMessages');
 
-    let firstUserMessageSent = false;
-    if (chatButton && chatPopup && closeChatBtn && chatMessages && chatInput && sendChatBtn) {
+    if (chatButton && chatPopup && closeChat && chatMessages && chatInput && sendChatBtn) {
 
         chatButton.addEventListener('click', () => {
             if (chatPopup.classList.contains('show')) {
@@ -78,65 +78,54 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Ẩn popup khi click vào nút đóng
-        closeChatBtn.addEventListener('click', () => {
+        closeChat.addEventListener('click', () => {
             chatPopup.classList.remove('show');
         });
+}
+    // Thêm tin nhắn vào khung chat
+    function addMessage(message, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+        messageDiv.innerHTML = message;
+        chatMessages.appendChild(messageDiv);
+        
+        // Cuộn xuống tin nhắn mới nhất
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
 
-        // Hàm gửi tin nhắn
-        const sendMessage = () => {
-            const messageText = chatInput.value.trim(); // Lấy text và xóa khoảng trắng thừa
+    // Xử lý gửi tin nhắn
+    async function sendMessage() {
+        const message = chatInput.value.trim();
+        if (!message) return;
 
-            if (messageText === '') {
-                return; // Không gửi nếu tin nhắn rỗng
-            }
+        // Hiển thị tin nhắn của người dùng
+        addMessage(message, true);
+        chatInput.value = '';
 
-            // 1. Hiển thị tin nhắn của người dùng
-            appendMessage(messageText, 'user');
+        try {
+            const response = await fetch('/chat/process-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message }),
+            });
 
-            // 2. Xóa nội dung trong ô input
-            chatInput.value = '';
-
-            // 3. Kiểm tra và gửi tin nhắn trả lời tự động nếu là tin đầu tiên
-            if (!firstUserMessageSent) {
-                firstUserMessageSent = true; // Đánh dấu là đã gửi tin đầu tiên
-
-                // Gửi tin nhắn bot sau một khoảng trễ nhỏ (tùy chọn)
-                setTimeout(() => {
-                    const autoReply = "Đợi kết nối với nhân viên... Nếu quá lâu hãy liên hệ chúng tôi bằng phản hồi";
-                    appendMessage(autoReply, 'bot');
-                }, 500); // Trễ 0.5 giây
-            }
-
-            // Tự động cuộn xuống tin nhắn mới nhất
-            scrollToBottom();
-        };
-
-        // Gửi tin nhắn khi click nút Gửi
-        sendChatBtn.addEventListener('click', sendMessage);
-
-        // Gửi tin nhắn khi nhấn Enter trong ô input
-        chatInput.addEventListener('keypress', (event) => {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Ngăn hành động mặc định của Enter (thường là submit form)
-                sendMessage();
-            }
-        });
-
-        // --- Hàm tiện ích ---
-
-        // Hàm để thêm tin nhắn vào khu vực hiển thị
-        const appendMessage = (text, type) => {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', type); // Thêm class 'message' và class type ('user' hoặc 'bot')
-            messageElement.textContent = text;
-            chatMessages.appendChild(messageElement);
-        };
-
-        // Hàm để cuộn xuống cuối khu vực tin nhắn
-        const scrollToBottom = () => {
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            const data = await response.json();
+            addMessage(data.content);
+        } catch (error) {
+            console.error('Error:', error);
+            addMessage('Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại sau.');
         }
     }
+
+    // Xử lý sự kiện gửi tin nhắn
+    sendChatBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
 
     //Animation sang trang khác
     document.querySelectorAll('a.link').forEach(link => {
