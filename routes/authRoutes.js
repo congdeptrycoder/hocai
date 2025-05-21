@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const oauth2Client = require('../config/ggAuth');
 const userModel = require('../models/userCheck');
 const authController = require('../controllers/authController');
+const adminController = require('../controllers/adminController');
 
 // Route hiển thị trang đăng nhập/đăng ký
 router.get('/login', authController.showLogin);
@@ -29,5 +30,8 @@ router.post('/logout', authController.logout);
 
 // API lấy danh sách khoá học và bài học đang học của user
 router.get('/api/user/courses', authController.getUserCourses);
+
+// Route admin dashboard
+router.get('/admin', adminController.showAdminDashboard);
 
 module.exports = router; 

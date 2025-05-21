@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const chatModel = require('../models/chatModel');
-
+// Route xử lý tin nhắn chatbot NLP
 router.post('/process-message', (req, res) => {
     const { message } = req.body;
     if (!message) {

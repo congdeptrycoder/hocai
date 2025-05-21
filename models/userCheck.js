@@ -7,7 +7,7 @@ async function findUserByEmail(db, email) {
 // Hàm lấy thông tin người dùng
 async function findUserDetailsByEmail(db, email) {
     const [users] = await db.query(
-        'SELECT u.email, u.username, u.account, u.time_create, u.password, u.google_id, c.roadmap ' +
+        'SELECT u.email, u.username, u.account, u.time_create, u.password, u.google_id, u.role, c.roadmap ' +
         'FROM user_data u LEFT JOIN user_course c ON u.email = c.email WHERE u.email = ?',
         [email]
     );
@@ -18,12 +18,12 @@ async function findUserDetailsByEmail(db, email) {
 async function createUser(db, userData) {
     const { email, account, username, password, time_create, google_id } = userData;
     const [result] = await db.query(
-        'INSERT INTO user_data (email, account, username, password, time_create, google_id) VALUES (?, ?, ?, ?, ?, ?)',
+        'INSERT INTO user_data (email, account, username, password, time_create, google_id, role) VALUES (?, ?, ?, ?, ?, ?, "user")',
         [email, account, username, password, time_create, google_id]
     );
     await db.query(
         'INSERT INTO user_course (email, roadmap) VALUES (?, ?)',
-        [email, 'cbc0khc0gmc0']
+        [email, 'cbai0cbaikh0khgm0gm']
     );
     return result.insertId;
 }

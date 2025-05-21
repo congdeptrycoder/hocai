@@ -21,6 +21,10 @@ const sampleData = [
         answer: "Các khoá học của chúng tôi hiện tại đều miễn phí. Các khoá học cao cấp sẽ được cập nhật sau."
     },
     {
+        question: "học có mất tiền không",
+        answer: "Các khoá học của chúng tôi hiện tại đều miễn phí. Các khoá học cao cấp sẽ được cập nhật sau."
+    },
+    {
         question: "bao nhiêu khoá học",
         answer: "Hiện tại chúng tôi cung cấp 3 khoá học ( Chat với AI, Kahoot, Gamma AI ). Các khoá học mới sẽ liên tục được bổ sung trong thời gian sớm nhất."
     },

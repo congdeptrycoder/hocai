@@ -8,23 +8,23 @@ router.use((req, res, next) => {
     next();
 });
 
-// Chuyển hướng các trang
+// Route chuyển hướng trang chủ
 router.get('/', (req, res) => {
     res.render('index', { title: 'hocAI - Hướng dẫn giáo viên sử dụng công cụ AI', css: 'index', js: 'index' });
 });
-
+// Route chuyển hướng giới thiệu
 router.get('/gioithieu', (req, res) => {
     res.render('gioithieu', { title: 'Giới Thiệu Hoc AI', css: 'gioithieu' });
 });
-
+// Route chuyển hướng trang chính sách bảo mật
 router.get('/csbm', (req, res) => {
     res.render('csbm', { title: 'Chính sách bảo mật', css: 'chinhsachbaomat' });
 });
-
+// Route chuyển hướng trang tuyển dụng
 router.get('/tuyendung', (req, res) => {
     res.render('tuyendung', { title: 'Tuyển dụng Hoc AI', css: 'tuyendung' });
 });
-
+// Route chuyển hướng trang đóng góp
 router.get('/donggop', (req, res) => {
     res.render('donggop', { title: 'Đóng góp Hoc AI', css: 'donggop' });
 });

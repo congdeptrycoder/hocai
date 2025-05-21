@@ -160,13 +160,20 @@ class CourseController {
                 return res.json({ success: false, message: 'Không tìm thấy user!' });
             }
 
-            const updatedRoadmap = this.updateCourseRoadmap(roadmapStr, id_course, parseInt(stt));
-            if (!updatedRoadmap) {
-                return res.json({ success: false, message: 'Không tìm thấy roadmap khoá học!' });
+            const courseRoadmap = this.extractCourseRoadmap(roadmapStr, id_course);
+            const currentLessonIndex = parseInt(courseRoadmap) || 0;
+            const newLessonIndex = parseInt(stt);
+
+            if (newLessonIndex > currentLessonIndex) {
+                const updatedRoadmap = this.updateCourseRoadmap(roadmapStr, id_course, newLessonIndex);
+                if (!updatedRoadmap) {
+                    return res.json({ success: false, message: 'Không tìm thấy roadmap khoá học!' });
+                }
+                await this.courseModel.updateRoadmap(email, updatedRoadmap);
+                return res.json({ success: true, updated: true });
             }
 
-            await this.courseModel.updateRoadmap(email, updatedRoadmap);
-            return res.json({ success: true });
+            return res.json({ success: true, updated: false });
         } catch (err) {
             console.error('Lỗi cập nhật roadmap:', err);
             res.json({ success: false, message: 'Lỗi máy chủ!' });

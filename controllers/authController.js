@@ -119,7 +119,8 @@ const login = async (req, res) => {
         if (match) {
             req.session.user = {
                 userId: userfind.email,
-                username: userfind.username
+                username: userfind.username,
+                role: userfind.role
             };
             const roadmap = await userModel.getUserRoadmap(db, userfind.email);
             if (roadmap) {
@@ -130,7 +131,11 @@ const login = async (req, res) => {
                     console.error("Lỗi khi lưu session:", err);
                     return res.redirect('/login?error=session_save_error');
                 }
-                res.redirect('/');
+                if (userfind.role === 'user') {
+                    res.redirect('/');
+                } else {
+                    res.redirect('/admin'); // Redirect to admin page for non-user roles
+                }
             });
         } else {
             return res.render('login', {
@@ -143,7 +148,7 @@ const login = async (req, res) => {
         console.error('Lỗi trong quá trình đăng nhập:', error);
         res.render('login', {
             layout: false, title: 'Đăng nhập', css: 'login', js: 'login', isRegistering: false,
-            errorMessage: 'Đã xảy ra lỗi. Vui lòng thử lại.',
+            errorMessage: 'Đã xảy ra lỗi trong quá trình đăng nhập. Vui lòng thử lại.',
             formData
         });
     }
@@ -189,7 +194,11 @@ const googleCallback = async (req, res) => {
         let userRecordForSession;
         let existingUser = await userModel.findUserDetailsByEmail(db, emailFromGoogle);
         if (existingUser) {
-            userRecordForSession = { email: existingUser.email, username: existingUser.username };
+            userRecordForSession = { 
+                email: existingUser.email, 
+                username: existingUser.username,
+                role: existingUser.role 
+            };
             if (googleId && !existingUser.google_id) {
                 await userModel.updateUserGoogleId(db, emailFromGoogle, googleId);
             }
@@ -208,11 +217,17 @@ const googleCallback = async (req, res) => {
                 google_id: googleId
             };
             await userModel.createUser(db, newUser);
-            userRecordForSession = { email: emailFromGoogle, username: username, account: null };
+            userRecordForSession = { 
+                email: emailFromGoogle, 
+                username: username, 
+                account: null,
+                role: 'user' 
+            };
         }
         req.session.user = {
             userId: userRecordForSession.email,
-            username: userRecordForSession.username
+            username: userRecordForSession.username,
+            role: userRecordForSession.role
         };
         const roadmap = await userModel.getUserRoadmap(db, userRecordForSession.email);
         if (roadmap) {
@@ -223,7 +238,11 @@ const googleCallback = async (req, res) => {
                 console.error("Lỗi khi lưu session:", err);
                 return res.redirect('/login?error=session_save_error');
             }
-            res.redirect('/');
+            if (userRecordForSession.role === 'user') {
+                res.redirect('/');
+            } else {
+                res.redirect('/admin');
+            }
         });
     } catch (error) {
         console.error('Lỗi trong Google OAuth callback:', error.message);
@@ -243,6 +262,7 @@ const getCurrentUser = async (req, res) => {
                     username: user.username,
                     email: user.email,
                     account: user.account,
+                    role: user.role,
                     time_create: user.time_create.toLocaleString("vi-VN", {
                         day: '2-digit',
                         month: '2-digit',
