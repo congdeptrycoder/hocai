@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS lesson_name (
 
 -- Create lesson_quizz table
 CREATE TABLE IF NOT EXISTS lesson_quizz (
+    id_quizz INT NOT NULL AUTO_INCREMENT,
     id_lesson VARCHAR(45) NOT NULL,
     id_course VARCHAR(45) NOT NULL,
     id_chapter VARCHAR(20) NOT NULL,
-    id_quizz INT NOT NULL,
     question TEXT NOT NULL,
     type TEXT NOT NULL,
     PRIMARY KEY (id_lesson, id_course, id_chapter, id_quizz)

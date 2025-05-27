@@ -7,7 +7,7 @@ class CourseController {
 
     async getCoursePage(req, res) {
         if (!req.session?.user?.userId) {
-            return res.send(`<script>alert('Coming soon'); window.location.href = '/';</script>`);
+            return res.send(`<script>alert('Bạn phải đăng nhập để học'); window.location.href = '/';</script>`);
         }
 
         const email = req.session.user.userId;
