@@ -4,6 +4,7 @@ const { engine } = require('express-handlebars');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const path = require('path');
+const fs = require('fs');
 const mainRouter = require('./routes/main');
 const authRouter = require('./routes/authRoutes');
 const mysql = require('mysql2/promise');
@@ -111,6 +112,30 @@ global.generateRandomPassword = function () {
     return password.split('').sort(() => 0.5 - Math.random()).join('');
 };
 
-app.listen(port, () => {
+// Hàm để thực thi file SQL
+async function executeSqlFile(filePath) {
+    try {
+        const sql = fs.readFileSync(filePath, 'utf8');
+        const connection = await pool.getConnection();
+        try {
+            // Tách các câu lệnh SQL và thực thi từng câu
+            const statements = sql.split(';').filter(statement => statement.trim());
+            for (const statement of statements) {
+                if (statement.trim()) {
+                    await connection.query(statement);
+                }
+            }
+            console.log('Đã thực thi thành công file SQL:', filePath);
+        } finally {
+            connection.release();
+        }
+    } catch (error) {
+        console.error('Lỗi khi thực thi file SQL:', error);
+    }
+}
+
+app.listen(port, async () => {
     console.log(`Server đang chạy tại http://localhost:${port}`);
+    // Thực thi file create_database.sql khi server khởi động
+    await executeSqlFile(path.join(__dirname, 'create_database.sql'));
 });
