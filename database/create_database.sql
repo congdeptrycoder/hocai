@@ -1,8 +1,9 @@
-CREATE DATABASE  IF NOT EXISTS `hocai_schema` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `hocai_schema`;
+/*LƯU Ý: CHẠY FILE NÀY TRONG MYSQL WORKBENCH TRƯỚC KHI KHỞI CHẠY SERVER*/
+CREATE DATABASE  IF NOT EXISTS `hocai` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `hocai`;
 -- MySQL dump 10.13  Distrib 8.0.41, for macos15 (arm64)
 --
--- Host: localhost    Database: hocai_schema
+-- Host: localhost    Database: hocai
 -- ------------------------------------------------------
 -- Server version	9.2.0
 

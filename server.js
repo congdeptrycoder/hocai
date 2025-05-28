@@ -136,6 +136,4 @@ async function executeSqlFile(filePath) {
 
 app.listen(port, async () => {
     console.log(`Server đang chạy tại http://localhost:${port}`);
-    // Thực thi file create_database.sql khi server khởi động
-    await executeSqlFile(path.join(__dirname, 'database', 'create_database.sql'));
 });
