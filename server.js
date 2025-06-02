@@ -15,7 +15,33 @@ const adminCoursesRouter = require('./routes/adminCourses');
 const app = express();
 const port = 3000;
 
-// Kiểm tra kết nối cơ sở dữ liệu
+//Tạo database
+async function runSqlFile() {
+    try {
+        const sqlFilePath = path.join(__dirname, 'database', 'create_database.sql');
+        const connection = await mysql.createConnection({
+            host: dbConfig.HOST,
+            user: dbConfig.USER,
+            password: dbConfig.PASSWORD,
+            port: dbConfig.PORT
+        });
+        const sql = fs.readFileSync(sqlFilePath, 'utf8');
+        const statements = sql.split(/;\s*[\r\n]+/);
+        for (let stmt of statements) {
+            if (stmt.trim()) {
+                await connection.query(stmt);
+            }
+        }
+        await connection.end();
+        console.log('Đã kiểm tra/tạo database và các bảng.');
+    } catch (err) {
+        console.error('Lỗi khi chạy file SQL:', err);
+    }
+}
+
+runSqlFile();
+
+//Kết nối database
 const pool = mysql.createPool({
     host: dbConfig.HOST,
     user: dbConfig.USER,
@@ -26,6 +52,7 @@ const pool = mysql.createPool({
     connectionLimit: dbConfig.pool.max,
     queueLimit: 0
 });
+
 //Lưu phiên đăng nhập vào database
 const sessionStoreOptions = {
     host: dbConfig.HOST,
@@ -58,6 +85,7 @@ app.use(session({
         maxAge: 24 * 60 * 60 * 1000 
     }
 }));
+
 //Kiểm tra kết nối đến database
 pool.getConnection((err, connection) => {
     if (err) {
