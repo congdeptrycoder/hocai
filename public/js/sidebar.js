@@ -1,3 +1,6 @@
+/**
+ * Xử lý sidebar, popup thông tin người dùng, chỉnh sửa thông tin, đăng xuất
+ */
 document.addEventListener('DOMContentLoaded', function () {
     const toggleBtn = document.querySelector('.side-bar-toggle svg');
     const sidebarMenu = document.querySelector('.side-bar-menu');
@@ -31,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const loginInfoLink = document.getElementById('login-info');
     const logoutButton = document.getElementById('logoutButtonFromPopup');
     const userPopupOverlay = document.getElementById('userPopupOverlay');
-    const userInfoPopupContainer = document.getElementById('userInfoPopup'); // Đổi tên biến để rõ hơn
+    const userInfoPopupContainer = document.getElementById('userInfoPopup'); 
     const closePopupBtn = document.getElementById('closePopupBtn');
     const bodyElement = document.body;
 
@@ -41,25 +44,35 @@ document.addEventListener('DOMContentLoaded', function () {
     const popupLoginDate = document.getElementById('popup-logindate');
     const popupCourses = document.getElementById('popup-courses');
 
+    const editUserBtn = document.getElementById('editUserBtn');
+    const saveUserBtn = document.getElementById('saveUserBtn');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const editUsernameInput = document.getElementById('edit-username');
+    const editAccountInput = document.getElementById('edit-account');
+    const editEmailInput = document.getElementById('edit-email');
+    const editPasswordInput = document.getElementById('edit-password');
+
+    let currentUserData = null; 
+
+    /**
+     * Lấy thông tin người dùng hiện tại và hiển thị popup
+     */
     async function fetchAndShowUserInfo() {
         try {
             const response = await fetch('/api/user/current');
             if (response.ok) {
                 const userData = await response.json();
+                currentUserData = userData; 
                 if (userData && userData.username) {
                     loginInfoLink.textContent = `Xin chào, ${userData.username}`;
-                    loginInfoLink.removeAttribute('href'); // Xóa href="/login"
-                    loginInfoLink.style.cursor = 'pointer'; // Đổi con trỏ để biết là có thể click
-
-                    // Gán sự kiện click để mở popup CHỈ KHI đã đăng nhập
-                    loginInfoLink.onclick = async function (event) { // Sử dụng onclick để dễ dàng gỡ bỏ hoặc thay đổi
+                    loginInfoLink.removeAttribute('href');
+                    loginInfoLink.style.cursor = 'pointer';
+                    loginInfoLink.onclick = async function (event) {
                         event.preventDefault();
-                        // Điền thông tin vào popup trước khi hiển thị
                         if (popupUsername) popupUsername.textContent = userData.username;
                         if (popupAccount) popupAccount.textContent = userData.account || 'N/A';
                         if (popupEmail) popupEmail.textContent = userData.email;
                         if (popupLoginDate) popupLoginDate.textContent = userData.time_create;
-                        // Lấy và hiển thị khóa học
                         if (popupCourses) {
                             popupCourses.innerHTML = '<div>Đang tải...</div>';
                             try {
@@ -85,12 +98,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                         showUserPopup();
                     };
-                } else { // Trường hợp API trả về OK nhưng không có userData.username (ít xảy ra)
+                } else {
                     setLoginLinkDefault();
                 }
-            } else if (response.status === 401) { // Chưa đăng nhập
+            } else if (response.status === 401) {
                 setLoginLinkDefault();
-            } else { // Lỗi khác từ API
+            } else {
                 console.error('API error:', response.status, await response.text());
                 setLoginLinkDefault();
             }
@@ -100,6 +113,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /**
+     * Đặt lại link đăng nhập về mặc định
+     */
     function setLoginLinkDefault() {
         loginInfoLink.textContent = 'Đăng nhập';
         loginInfoLink.setAttribute('href', '/login');
@@ -107,6 +123,9 @@ document.addEventListener('DOMContentLoaded', function () {
         loginInfoLink.onclick = null;
     }
 
+    /**
+     * Hiển thị popup thông tin người dùng
+     */
     function showUserPopup() {
         if (userPopupOverlay && userInfoPopupContainer) {
             userPopupOverlay.classList.add('active');
@@ -114,6 +133,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /**
+     * Ẩn popup thông tin người dùng
+     */
     function hideUserPopup() {
         if (userPopupOverlay) {
             userPopupOverlay.classList.remove('active');
@@ -122,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (loginInfoLink) {
-        fetchAndShowUserInfo(); // Gọi khi trang tải xong
+        fetchAndShowUserInfo(); 
     }
 
     if (closePopupBtn) {
@@ -131,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (userPopupOverlay) {
         userPopupOverlay.addEventListener('click', function (event) {
-            // Đóng popup chỉ khi click vào overlay, không phải vào content của popup
+            
             if (event.target === userPopupOverlay) {
                 hideUserPopup();
             }
@@ -146,22 +168,20 @@ document.addEventListener('DOMContentLoaded', function () {
     if (logoutButton) {
         logoutButton.addEventListener('click', async function () {
             try {
-                // Sử dụng fetch để gửi yêu cầu POST đến /logout
+               
                 const response = await fetch('/logout', {
                     method: 'POST',
                     headers: {
-                        // Thêm các header cần thiết nếu có, ví dụ CSRF token
-                        // 'Content-Type': 'application/json' // Không cần cho POST rỗng
+                       
                     }
                 });
 
                 if (response.ok) {
-                    // Nếu server trả về redirect, trình duyệt sẽ tự động theo sau
-                    // Hoặc nếu server trả về JSON success, bạn có thể redirect ở đây
+                   
                     console.log('Đăng xuất thành công, đang chuyển hướng...');
-                    window.location.href = '/'; // Đảm bảo chuyển hướng về trang chủ
+                    window.location.href = '/'; 
                 } else {
-                    // Xử lý lỗi nếu có từ server
+                  
                     console.error('Lỗi đăng xuất:', response.status, await response.text());
                     alert('Đăng xuất không thành công. Vui lòng thử lại.');
                 }
@@ -171,4 +191,85 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    /**
+     * Bật/tắt chế độ chỉnh sửa thông tin người dùng
+     * @param {boolean} isEdit
+     */
+    function setEditMode(isEdit) {
+     
+        popupUsername.style.display = isEdit ? 'none' : '';
+        editUsernameInput.style.display = isEdit ? '' : 'none';
+        popupAccount.style.display = isEdit ? 'none' : '';
+        editAccountInput.style.display = isEdit ? '' : 'none';
+        popupEmail.style.display = isEdit ? 'none' : '';
+        editEmailInput.style.display = isEdit ? '' : 'none';
+        
+        editPasswordInput.style.display = isEdit ? '' : 'none';
+       
+        editUserBtn.style.display = isEdit ? 'none' : '';
+        saveUserBtn.style.display = isEdit ? '' : 'none';
+        cancelEditBtn.style.display = isEdit ? '' : 'none';
+    }
+
+    if (editUserBtn && saveUserBtn && cancelEditBtn) {
+        editUserBtn.addEventListener('click', function () {
+            if (!currentUserData) return;
+            
+            editUsernameInput.value = currentUserData.username || '';
+            editAccountInput.value = currentUserData.account || '';
+            editEmailInput.value = currentUserData.email || '';
+            editPasswordInput.value = '';
+            setEditMode(true);
+        });
+        cancelEditBtn.addEventListener('click', function () {
+            setEditMode(false);
+        });
+        
+        saveUserBtn.addEventListener('click', async function () {
+            if (!currentUserData) return;
+            
+            const newUsername = editUsernameInput.value.trim();
+            const newAccount = editAccountInput.value.trim();
+            const newEmail = editEmailInput.value.trim();
+            const newPassword = editPasswordInput.value; 
+           
+            if (!newUsername || !newAccount || !newEmail) {
+                alert('Vui lòng nhập đầy đủ thông tin.');
+                return;
+            }
+          
+            try {
+                const res = await fetch('/api/user/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: newUsername,
+                        account: newAccount,
+                        email: newEmail,
+                        password: newPassword 
+                    })
+                });
+                if (res.ok) {
+                    
+                    currentUserData.username = newUsername;
+                    currentUserData.account = newAccount;
+                    currentUserData.email = newEmail;
+                    if (popupUsername) popupUsername.textContent = newUsername;
+                    if (popupAccount) popupAccount.textContent = newAccount;
+                    if (popupEmail) popupEmail.textContent = newEmail;
+                    setEditMode(false);
+                    alert('Cập nhật thông tin thành công!');
+                } else {
+                    const err = await res.text();
+                    alert('Cập nhật thất bại: ' + err);
+                }
+            } catch (e) {
+                alert('Có lỗi khi cập nhật: ' + e.message);
+            }
+        });
+    }
+    setEditMode(false); 
 });

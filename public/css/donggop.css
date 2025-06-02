@@ -21,31 +21,21 @@
 
 .contribute-content-image {
     display: flex;
-    /* sắp xếp ngang */
     justify-content: center;
-    /* căn giữa */
-
     gap: 60px;
-    /* khoảng cách giữa các ảnh */
-
 }
 
-/* Cấu hình khung chứa từng ảnh */
 .image1,
 .image2,
 .image3 {
     width: 30%;
-    /* Mỗi ảnh chiếm 30% chiều ngang */
     max-width: 300px;
 }
 
-/* Cấu hình riêng cho ảnh bên trong */
 .image1 img {
     border-radius: 10px;
     width: 100%;
-    /* Ảnh vừa với khung chứa */
     transform: rotate(-30deg);
-    /* Nghiêng trái */
     margin-top: 100px;
     margin-top: 200px;
 }
@@ -54,7 +44,6 @@
     border-radius: 10px;
     width: 100%;
     transform: rotate(0deg);
-    /* Ảnh giữa không xoay */
     margin-top: 100px;
 }
 
@@ -62,7 +51,6 @@
     border-radius: 10px;
     width: 100%;
     transform: rotate(30deg);
-    /* Nghiêng phải */
     margin-top: 200px;
 
 }
@@ -123,11 +111,8 @@
     .contribute-content-image {
         padding: 50px 60px;
         display: flex;
-        /* sắp xếp ngang */
         justify-content: center;
-        /* căn giữa */
         gap: 5px;
-        /* khoảng cách giữa các ảnh */
 
     }
 
@@ -138,10 +123,8 @@
         justify-content: center;
     }
 
-    /* Cấu hình riêng cho ảnh bên trong */
     .image1 img {
 
-        /* Ảnh vừa với khung chứa */
         transform: rotate(-30deg);
         margin-top: 0px;
     }
@@ -185,7 +168,6 @@
     .image2 img,
     .image3 img {
         width: 100%;
-        /* Ảnh vừa với khung chứa */
         transform: rotate(0deg);
         margin-top: 0px;
     }

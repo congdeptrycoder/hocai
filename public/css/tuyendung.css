@@ -15,7 +15,6 @@
     font-family: Arial, sans-serif;
     box-shadow: 2px 2px 20px rgba(0, 34, 59, 0.25);
     overflow: visible;
-    /* Đảm bảo không bị ẩn */
 }
 
 .recruiment-notification h1 {

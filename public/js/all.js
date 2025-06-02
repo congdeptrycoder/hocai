@@ -1,4 +1,6 @@
-//Nếu bấm nút back/forward
+/**
+ * Xử lý hiệu ứng scroll, cuộn lên đầu trang, chat popup, animation chuyển trang
+ */
 window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
         document.body.classList.remove('page-exiting-left');
@@ -6,16 +8,20 @@ window.addEventListener('pageshow', function (event) {
         document.body.style.overflowX = '';
     }
 });
-//Hiệu ứng scroll
 const scrollElements = document.querySelectorAll('.scroll');
 
 if (scrollElements.length > 0) {
     const scrollOptions = {
-        root: null, // Sử dụng viewport làm gốc
-        rootMargin: '0px', // Không có khoảng đệm
-        threshold: 0.1 // Kích hoạt khi 10% phần tử hiển thị
+        root: null, 
+        rootMargin: '0px', 
+        threshold: 0.1 
     };
 
+    /**
+     * Thêm class visible cho các phần tử scroll khi xuất hiện trên màn hình
+     * @param {IntersectionObserverEntry[]} entries
+     * @param {IntersectionObserver} observer
+     */
     const scrollCallback = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -32,9 +38,11 @@ if (scrollElements.length > 0) {
 document.addEventListener('DOMContentLoaded', function () {
     const scrollToTopButton = document.querySelector('.scroll-to-top');
     const scrollscreen = 150;
-    // Hàm hiển thị scroll-to-top
+    /**
+     * Hiển thị hoặc ẩn nút scroll-to-top
+     */
     function toggleScrollToTopButton() {
-        // window.pageYOffset là thuộc tính cũ, dùng document.documentElement.scrollTop cho các trình duyệt hiện đại
+        
         const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
         if (currentScroll > scrollscreen) {
@@ -44,6 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /**
+     * Cuộn lên đầu trang
+     */
     function scrollToTop() {
         window.scrollTo({
             top: 0,
@@ -77,28 +88,29 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Ẩn popup khi click vào nút đóng
         closeChat.addEventListener('click', () => {
             chatPopup.classList.remove('show');
         });
 }
-    // Thêm tin nhắn vào khung chat
+    /**
+     * Thêm tin nhắn vào khung chat
+     * @param {string} message
+     * @param {boolean} isUser
+     */
     function addMessage(message, isUser = false) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
         messageDiv.innerHTML = message;
         chatMessages.appendChild(messageDiv);
-        
-        // Cuộn xuống tin nhắn mới nhất
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // Xử lý gửi tin nhắn
+    /**
+     * Gửi tin nhắn chat tới server
+     */
     async function sendMessage() {
         const message = chatInput.value.trim();
         if (!message) return;
-
-        // Hiển thị tin nhắn của người dùng
         addMessage(message, true);
         chatInput.value = '';
 
@@ -132,21 +144,12 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(link)
         link.addEventListener('click', function (event) {
             const href = this.getAttribute('href');
-            const target = this.getAttribute('target'); // Kiểm tra target="_blank"
-
-            // Kiểm tra link hợp lệ, không phải link neo (#) và không phải target="_blank"
+            const target = this.getAttribute('target'); 
             if (href && href !== '#' && !href.startsWith('javascript:') && target !== '_blank') {
-                event.preventDefault(); // Ngăn chuyển trang ngay lập tức
-
-                // Ngăn thanh cuộn ngang xuất hiện trong khi chuyển động
-                // Áp dụng cho cả html và body để đảm bảo
+                event.preventDefault(); 
                 document.documentElement.style.overflowX = 'hidden';
                 document.body.style.overflowX = 'hidden';
-
-                // Thêm class để kích hoạt animation trượt sang trái
                 document.body.classList.add('page-exiting-left');
-
-                // Đợi animation hoàn thành rồi mới chuyển trang
                 setTimeout(() => {
                     window.location.href = href;
                 }, 500);

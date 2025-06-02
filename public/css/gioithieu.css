@@ -17,20 +17,15 @@
 .introduce-aboutHocAI-container {
   margin-top: 200px;
   display: flex;
-  /* Xếp theo chiều ngang */
   justify-content: space-between;
-  /* Khoảng cách đều */
   align-items: center;
-  /* Căn chỉnh theo chiều dọc */
 }
 
 .introduce-aboutHocAI-image2 img {
   border-radius: 510px;
   margin-left: 150px;
   width: 600px;
-  /* kích thước ảnh thứ hai */
   height: auto;
-  /* Giữ tỷ lệ ảnh */
 }
 
 .introduce-aboutHocAI-content {
@@ -44,10 +39,8 @@
 
 .introduce-aboutHocAI-content img {
   width: 200px;
-  /* Giảm kích thước logo */
   height: auto;
   margin-top: 20px;
-  /* Khoảng cách giữa văn bản và logo */
 }
 
 .target-container h1 {
@@ -64,11 +57,8 @@
   width: 100%;
   margin-top: 100px;
   display: flex;
-  /* Xếp theo chiều ngang */
   justify-content: space-between;
-  /* Khoảng cách đều */
   align-items: center;
-  /* Căn chỉnh theo chiều dọc */
 }
 
 .target-box {
@@ -138,7 +128,6 @@
 .text p {
   font-size: 30px;
   text-align: center;
-  /* căn giữa */
 
 }
 

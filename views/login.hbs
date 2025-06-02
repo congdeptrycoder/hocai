@@ -68,7 +68,7 @@
                         <button type="submit">Đăng nhập</button>
                     </form>
                     <div class="login-text">
-                        <p><a href="#">Quên tài khoản hoặc mật khẩu</a></p>
+                        <p><a href="#" id="forgot-password-link">Quên tài khoản hoặc mật khẩu</a></p>
                         <p>Bạn chưa có tài khoản ?</p>
                         <p id="signup"><a href="#">Đăng ký ngay</a></p>
                         
@@ -111,6 +111,18 @@
                     <div class="login-text">
                         <p>Bạn đã có tài khoản ?</p>
                         <p id="login"><a href="#">Quay lại đăng nhập</a></p>
+                    </div>
+                </div>
+
+                <div class="forgot-password-box">
+                    <h2>TRỢ GIÚP</h2>
+                    <form action="/forgot-password" method="post">
+                        <p>Tài khoản/Email <span class="login-required-note">*</span></p>
+                        <input type="text" name="accountOrEmail" placeholder="Nhập tài khoản hoặc email" required>
+                        <button type="submit">Gửi</button>
+                    </form>
+                    <div class="login-text">
+                        <p><a href="#" id="back-to-login">Quay lại đăng nhập</a></p>
                     </div>
                 </div>
             </div>

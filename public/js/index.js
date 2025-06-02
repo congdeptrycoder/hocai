@@ -1,4 +1,6 @@
-//Demo- Chọn xem demo giao diện
+/**
+ * Xử lý hiệu ứng chọn demo giao diện trên trang chủ
+ */
 const choiceBoxes = document.querySelectorAll('.demo-box-choice');
 const demoImage = document.querySelector('.demo-image');
 const boxToImageMap = {
@@ -8,6 +10,9 @@ const boxToImageMap = {
 };
 demoImage.innerHTML = '<p class="default-message">Hãy chọn để xem giao diện của chúng tôi</p>';
 choiceBoxes.forEach((box, index) => {
+    /**
+     * Xử lý sự kiện click vào box demo
+     */
     box.addEventListener('click', function () {
         this.classList.toggle('active-border');
         choiceBoxes.forEach(otherBox => {

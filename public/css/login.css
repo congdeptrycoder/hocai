@@ -172,7 +172,9 @@ button {
     text-align: left;
     font-size: 0.8em;
 }
-
+#signup {
+    padding-bottom: 20px;
+}
 .login-text p a {
     color: #AEE2F6;
 
@@ -200,7 +202,32 @@ button {
     width: auto;
 }
 
-
+.forgot-password-box {
+    display: none;
+}
+.forgot-password-box.active {
+    opacity: 0;
+    animation-name: slideInFromBottom;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    margin-top: 20px;
+    width: 30%;
+    background-color: #003459;
+    border-radius: 20px;
+    display: flex;
+    font-size: 18px;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+    padding: 20px 0px;
+}
+.forgot-password-box h2 {
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding: 0px 0px 10px 0px;
+}
 
 @media screen and (max-width: 799px) {
     .login-container h1 {
@@ -216,6 +243,11 @@ button {
     .google-login-button {
         justify-content: space-evenly;
         width: 80%;
+    }
+
+    .forgot-password-box.active {
+        font-size: 17px;
+        width: 90%;
     }
 }
 
@@ -233,5 +265,10 @@ button {
     .google-login-button {
 
         width: 50%;
+    }
+
+    .forgot-password-box.active {
+        width: 60%;
+        font-size: 17px;
     }
 }

@@ -34,4 +34,7 @@ router.get('/api/user/courses', authController.getUserCourses);
 // Route admin dashboard
 router.get('/admin', adminController.showAdminDashboard);
 
+// Route POST /api/user/update
+router.post('/api/user/update', authController.handleUpdateUserInfo);
+
 module.exports = router; 

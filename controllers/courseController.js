@@ -5,6 +5,11 @@ class CourseController {
         this.courseModel = new CourseModel(db);
     }
 
+    /**
+     * Xử lý sự kiện người dùng truy cập trang học 
+     * @param {Request} req
+     * @param {Response} res
+     */
     async getCoursePage(req, res) {
         if (!req.session?.user?.userId) {
             return res.send(`<script>alert('Bạn phải đăng nhập để học'); window.location.href = '/';</script>`);
@@ -47,7 +52,7 @@ class CourseController {
                 });
             }
 
-            const chapters = await this.courseModel.getChapters(id_course);
+            const chapters = await CourseModel.getChapters(this.courseModel.db, id_course);
             const chapterList = await this.buildChapterList(id_course, chapters, currentLessonIndex);
 
             res.render('tranghoc', {
@@ -62,6 +67,11 @@ class CourseController {
         }
     }
 
+    /**
+     * Xử lý sự kiện người dùng bấm đăng ký khoá học
+     * @param {Request} req
+     * @param {Response} res
+     */
     async registerCourse(req, res) {
         if (!req.session?.user?.userId) {
             return res.json({ success: false, message: 'Bạn cần đăng nhập!' });
@@ -93,6 +103,11 @@ class CourseController {
         }
     }
 
+    /**
+     * Lấy nội dung bài học
+     * @param {Request} req
+     * @param {Response} res
+     */
     async getLessonContent(req, res) {
         if (!req.session?.user?.userId) {
             return res.status(401).json({ success: false, message: 'Bạn cần đăng nhập!' });
@@ -123,6 +138,11 @@ class CourseController {
         return res.json({ success: true, data: content });
     }
 
+    /**
+     * Lấy quiz của bài học
+     * @param {Request} req
+     * @param {Response} res
+     */
     async getLessonQuizz(req, res) {
         if (!req.session?.user?.userId) {
             return res.status(401).json({ success: false, message: 'Bạn cần đăng nhập!' });
@@ -142,6 +162,11 @@ class CourseController {
         }
     }
 
+    /**
+     * Cập nhật lộ trình học của người dùng
+     * @param {Request} req
+     * @param {Response} res
+     */
     async updateRoadmap(req, res) {
         if (!req.session?.user?.userId) {
             return res.status(401).json({ success: false, message: 'Bạn cần đăng nhập!' });
@@ -180,7 +205,58 @@ class CourseController {
         }
     }
 
+    /**
+     * Lấy bình luận của bài học
+     * @param {Request} req
+     * @param {Response} res
+     */
+    async getLessonComments(req, res) {
+        if (!req.session?.user?.userId) {
+            return res.status(401).json({ success: false, message: 'Bạn cần đăng nhập!' });
+        }
+        const { id_course, id_chapter, id_lesson } = req.query;
+        if (!id_course || !id_chapter || !id_lesson) {
+            return res.status(400).json({ success: false, message: 'Thiếu tham số!' });
+        }
+        try {
+            const comments = await this.courseModel.getLessonComments(id_course, id_chapter, id_lesson);
+            return res.json({ success: true, data: comments });
+        } catch (err) {
+            console.error('Lỗi lấy bình luận:', err);
+            return res.status(500).json({ success: false, message: 'Lỗi máy chủ!' });
+        }
+    }
+
+    /**
+     * Thêm bình luận cho bài học
+     * @param {Request} req
+     * @param {Response} res
+     */
+    async addLessonComment(req, res) {
+        if (!req.session?.user?.userId) {
+            return res.status(401).json({ success: false, message: 'Bạn cần đăng nhập!' });
+        }
+        const email = req.session.user.userId;
+        const { id_course, id_chapter, id_lesson, cmt_content } = req.body;
+        if (!id_course || !id_chapter || !id_lesson || !cmt_content) {
+            return res.status(400).json({ success: false, message: 'Thiếu tham số!' });
+        }
+        try {
+            await this.courseModel.addLessonComment(email, id_course, id_chapter, id_lesson, cmt_content);
+            return res.json({ success: true });
+        } catch (err) {
+            console.error('Lỗi lưu bình luận:', err);
+            return res.status(500).json({ success: false, message: 'Lỗi máy chủ!' });
+        }
+    }
+
     // Helper methods
+    /**
+     * Trích xuất lộ trình khoá học từ roadmap của người dùng
+     * @param {string} roadmapStr
+     * @param {string} courseTag
+     * @returns {string}
+     */
     extractCourseRoadmap(roadmapStr, courseTag) {
         const firstIdx = roadmapStr.indexOf(courseTag);
         if (firstIdx === -1) return '';
@@ -192,6 +268,13 @@ class CourseController {
         return roadmapStr.substring(firstIdx + courseTag.length, secondIdx);
     }
 
+    /**
+     * Cập nhật tiến độ khoá học trong roadmap
+     * @param {string} roadmapStr
+     * @param {string} courseTag
+     * @param {number} [newValue=1]
+     * @returns {string}
+     */
     updateCourseRoadmap(roadmapStr, courseTag, newValue = 1) {
         const firstIdx = roadmapStr.indexOf(courseTag);
         const secondIdx = roadmapStr.indexOf(courseTag, firstIdx + courseTag.length);
@@ -207,13 +290,20 @@ class CourseController {
         return roadmapStr;
     }
 
+    /**
+     * Danh sách khoá học (theo thứ tự)
+     * @param {string} id_course
+     * @param {Array} chapters
+     * @param {number} currentLessonIndex
+     * @returns {Array}
+     */
     async buildChapterList(id_course, chapters, currentLessonIndex) {
         const chapterList = [];
         let lessonCounter = 0;
 
         for (let i = 0; i < chapters.length; i++) {
             const chapter = chapters[i];
-            const lessons = await this.courseModel.getLessons(id_course, chapter.id_chapter);
+            const lessons = await CourseModel.getLessons(this.courseModel.db, id_course, chapter.id_chapter);
             
             const chapterLessons = lessons.map(lesson => {
                 lessonCounter++;

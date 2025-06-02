@@ -24,7 +24,6 @@ body {
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  /*Thêm flex cho nội dung, và flex-start để độ cao chỉ bằng nội dung bên trong*/
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
@@ -201,7 +200,6 @@ ol>li {
   border: none;
   height: 1px;
   background-color: #e2e8f0;
-  /* màu xám nhạt giống figma */
   margin: 8px 0 16px;
 }
 
@@ -287,6 +285,7 @@ ol>li {
   height: 80px;
   border-radius: 6px;
   padding: 0.5rem;
+  font-size: 16px;
   border: 1px solid #e5e7eb;
 }
 
@@ -367,7 +366,6 @@ ol>li {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.4);
-  /* overlay nền */
   display: none;
   justify-content: center;
   align-items: center;
@@ -419,21 +417,14 @@ ol>li {
 
 .quiz-popup label.correct-answer {
   background-color: #d1fae5;
-  /* Màu xanh lá nhạt */
   border-color: #10b981;
-  /* Viền xanh lá đậm hơn */
   color: #065f46;
-  /* Chữ màu xanh lá đậm */
 }
 
 .quiz-popup label.incorrect-user-answer {
   background-color: #fee2e2;
-  /* Màu đỏ nhạt */
   border-color: #f87171;
-  /* Viền đỏ đậm hơn */
   color: #b91c1c;
-  /* Chữ màu đỏ đậm */
-  /* Có thể thêm gạch chân hoặc biểu tượng X nếu muốn */
 }
 
 .quiz-popup label:hover {

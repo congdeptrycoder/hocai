@@ -29,11 +29,13 @@ router.get('/donggop', (req, res) => {
     res.render('donggop', { title: 'Đóng góp Hoc AI', css: 'donggop' });
 });
 
-// Routes cho khóa học
+// Routes xử lý của trang học
 router.get('/tranghoc', (req, res) => req.courseController.getCoursePage(req, res));
 router.post('/register-course', (req, res) => req.courseController.registerCourse(req, res));
 router.get('/lesson-content', (req, res) => req.courseController.getLessonContent(req, res));
 router.get('/lesson-quizz', (req, res) => req.courseController.getLessonQuizz(req, res));
 router.post('/update-roadmap', (req, res) => req.courseController.updateRoadmap(req, res));
+router.get('/lesson-comments', (req, res) => req.courseController.getLessonComments(req, res));
+router.post('/lesson-comment', (req, res) => req.courseController.addLessonComment(req, res));
 
 module.exports = router;

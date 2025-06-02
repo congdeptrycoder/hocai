@@ -3,6 +3,13 @@ const bcrypt = require('bcryptjs');
 const oauth2Client = require('../config/ggAuth');
 const userModel = require('../models/userCheck');
 
+const userCheck = require('../models/userCheck');
+
+/**
+ * Hiển thị trang đăng nhập/đăng ký
+ * @param {Request} req
+ * @param {Response} res
+ */
 const showLogin = (req, res) => {
     if (req.session.user) {
         return res.redirect('/');
@@ -16,6 +23,11 @@ const showLogin = (req, res) => {
     });
 };
 
+/**
+ * Xử lý đăng ký 
+ * @param {Request} req
+ * @param {Response} res
+ */
 const register = async (req, res) => {
     const { email, account, displayName, password, confirmPassword, agreeTerms } = req.body;
     const db = req.db;
@@ -67,7 +79,8 @@ const register = async (req, res) => {
             username: displayName,
             password: hashedPassword,
             time_create: currentDate,
-            google_id: null
+            google_id: null,
+            role: 'user'
         };
         await userModel.createUser(db, newUser);
         req.session.user = {
@@ -90,6 +103,11 @@ const register = async (req, res) => {
     }
 };
 
+/**
+ * Xử lý đăng nhập 
+ * @param {Request} req
+ * @param {Response} res
+ */
 const login = async (req, res) => {
     const { email, password } = req.body;
     const db = req.db;
@@ -134,7 +152,7 @@ const login = async (req, res) => {
                 if (userfind.role === 'user') {
                     res.redirect('/');
                 } else {
-                    res.redirect('/admin'); // Redirect to admin page for non-user roles
+                    res.redirect('/admin');
                 }
             });
         } else {
@@ -154,6 +172,11 @@ const login = async (req, res) => {
     }
 };
 
+/**
+ * Chuyển hướng xác thực Google OAuth
+ * @param {Request} req
+ * @param {Response} res
+ */
 const googleAuth = (req, res) => {
     const scope = [
         'https://www.googleapis.com/auth/userinfo.profile',
@@ -167,6 +190,11 @@ const googleAuth = (req, res) => {
     res.redirect(authUrl);
 };
 
+/**
+ * Xử lý callback từ Google OAuth ( nếu chưa có sẵn thì tự đăng ký )
+ * @param {Request} req
+ * @param {Response} res
+ */
 const googleCallback = async (req, res) => {
     const code = req.query.code;
     const db = req.db;
@@ -204,7 +232,7 @@ const googleCallback = async (req, res) => {
             }
         } else {
             const username = nameFromGoogle;
-            const randomPassword = global.generateRandomPassword();
+            const randomPassword = generateRandomPassword();
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(randomPassword, saltRounds);
             const currentDate = new Date().toISOString().slice(0, 10);
@@ -214,7 +242,8 @@ const googleCallback = async (req, res) => {
                 username: username,
                 password: hashedPassword,
                 time_create: currentDate,
-                google_id: googleId
+                google_id: googleId,
+                role: 'user'
             };
             await userModel.createUser(db, newUser);
             userRecordForSession = { 
@@ -253,6 +282,11 @@ const googleCallback = async (req, res) => {
     }
 };
 
+/**
+ * Lấy thông tin người dùng 
+ * @param {Request} req
+ * @param {Response} res
+ */
 const getCurrentUser = async (req, res) => {
     if (req.session && req.session.user && req.session.user.userId) {
         try {
@@ -283,6 +317,12 @@ const getCurrentUser = async (req, res) => {
     }
 };
 
+/**
+ * Đăng xuất người dùng
+ * @param {Request} req
+ * @param {Response} res
+ * @param {function} next
+ */
 const logout = (req, res, next) => {
     if (req.session) {
         req.session.destroy(err => {
@@ -298,6 +338,11 @@ const logout = (req, res, next) => {
     }
 };
 
+/**
+ * Lấy danh sách khoá học của người dùng
+ * @param {Request} req
+ * @param {Response} res
+ */
 const getUserCourses = async (req, res) => {
     if (!req.session || !req.session.user || !req.session.user.userId) {
         return res.status(401).json({ message: 'Chưa đăng nhập' });
@@ -313,6 +358,85 @@ const getUserCourses = async (req, res) => {
     }
 };
 
+/**
+ * Cập nhật thông tin người dùng
+ * @param {Request} req
+ * @param {Response} res
+ */
+const handleUpdateUserInfo = async (req, res) => {
+    const db = req.db;
+    try {
+        if (!req.session || !req.session.user) {
+            return res.status(401).send('Chưa đăng nhập');
+        }
+        const oldEmail = req.session.user.userId;
+        const { email, account, username, password } = req.body;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const accountRegex = /^[a-zA-Z0-9_]+$/;
+        if (!email || !account || !username) {
+            return res.status(400).send('Thiếu thông tin');
+        }
+        if (!emailRegex.test(email)) {
+            return res.status(400).send('Email không hợp lệ');
+        }
+        if (!accountRegex.test(account)) {
+            return res.status(400).send('Tài khoản chỉ được chứa chữ, số, dấu gạch dưới');
+        }
+        if (username.trim().length === 0) {
+            return res.status(400).send('Tên người dùng không được để trống');
+        }
+        let hashedPassword = password;
+        if (password && password.length > 0) {
+            if (password.length < 6) {
+                return res.status(400).send('Mật khẩu phải có ít nhất 6 ký tự');
+            }
+            const upperCaseRegex = /[A-Z]/;
+            const numberRegex = /[0-9]/;
+            const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+            if (!upperCaseRegex.test(password)) {
+                return res.status(400).send('Mật khẩu phải chứa ít nhất 1 ký tự viết hoa');
+            }
+            if (!numberRegex.test(password)) {
+                return res.status(400).send('Mật khẩu phải chứa ít nhất 1 số');
+            }
+            if (!specialCharRegex.test(password)) {
+                return res.status(400).send('Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt');
+            }
+            const saltRounds = 10;
+            hashedPassword = await bcrypt.hash(password, saltRounds);
+        }
+        await userCheck.updateUserInfo(db, oldEmail, { email, account, username, password: hashedPassword });
+        if (oldEmail !== email) {
+            req.session.user.userId = email;
+        }
+        req.session.user.account = account;
+        req.session.user.username = username;
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Lỗi cập nhật user:', err);
+        res.status(500).send('Lỗi server');
+    }
+};
+
+/**
+ * Tạo mật khẩu ngẫu nhiên 
+ * @returns {string}
+ */
+function generateRandomPassword() {
+    const numbers = '0123456789';
+    const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const specialChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    let password = '';
+    for (let i = 0; i < 6; i++) {
+        password += numbers.charAt(Math.floor(Math.random() * numbers.length));
+    }
+    for (let i = 0; i < 5; i++) {
+        password += letters.charAt(Math.floor(Math.random() * letters.length));
+    }
+    password += specialChars.charAt(Math.floor(Math.random() * specialChars.length));
+    return password.split('').sort(() => 0.5 - Math.random()).join('');
+}
+
 module.exports = {
     showLogin,
     register,
@@ -321,5 +445,7 @@ module.exports = {
     googleCallback,
     getCurrentUser,
     logout,
-    getUserCourses
+    getUserCourses,
+    handleUpdateUserInfo,
+    generateRandomPassword 
 }; 

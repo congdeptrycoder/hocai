@@ -122,32 +122,24 @@ h3 {
 @keyframes slideInFromRight {
     from {
         transform: translateX(100%);
-        /* Bắt đầu từ ngoài màn hình bên trái */
         opacity: 0;
-        /* Bắt đầu ẩn */
     }
 
     to {
         transform: translateX(0);
-        /* Kết thúc tại vị trí gốc */
         opacity: 1;
-        /* Kết thúc hiển thị rõ */
     }
 }
 
 @keyframes slideInFromLeft {
     from {
         transform: translateX(-100%);
-        /* Bắt đầu từ ngoài màn hình bên trái */
         opacity: 0;
-        /* Bắt đầu ẩn */
     }
 
     to {
         transform: translateX(0);
-        /* Kết thúc tại vị trí gốc */
         opacity: 1;
-        /* Kết thúc hiển thị rõ */
     }
 }
 
@@ -316,7 +308,6 @@ h3 {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    /* Về vị trí gốc */
 }
 
 .scroll-to-top img {
@@ -330,15 +321,10 @@ h3 {
     transform: scale(1.1);
 
 }
-
-
-
 /*animation chuyển sang trang khác*/
 body {
     animation: slideInFromRight 0.5s ease-out;
-    /* Đảm bảo body sẵn sàng cho transform và không bị giật */
     transition: transform 0.5s ease-out, opacity 0.4s ease-out;
-    /* Điều chỉnh thời gian và kiểu chuyển động nếu muốn */
 }
 
 body.page-exiting-left {

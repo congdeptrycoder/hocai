@@ -10,6 +10,7 @@ const authRouter = require('./routes/authRoutes');
 const mysql = require('mysql2/promise');
 const dbConfig = require('./config/db');
 const chatRouter = require('./routes/chat');
+const adminCoursesRouter = require('./routes/adminCourses');
 
 const app = express();
 const port = 3000;
@@ -25,19 +26,19 @@ const pool = mysql.createPool({
     connectionLimit: dbConfig.pool.max,
     queueLimit: 0
 });
-// --- Cấu hình Session Store với MySQL ---
+//Lưu phiên đăng nhập vào database
 const sessionStoreOptions = {
     host: dbConfig.HOST,
     port: dbConfig.PORT,
     user: dbConfig.USER,
     password: dbConfig.PASSWORD,
     database: dbConfig.DB,
-    clearExpired: true, // Tự động xóa các session đã hết hạn
-    checkExpirationInterval: 900000, // Tần suất kiểm tra session hết hạn (ví dụ: 15 phút)
-    expiration: 24 * 60 * 60 * 1000, // Thời gian sống của session (ví dụ: 1 ngày), giống maxAge của cookie
-    createDatabaseTable: true, // Tự động tạo bảng 'sessions' nếu chưa có
+    clearExpired: true, 
+    checkExpirationInterval: 900000, 
+    expiration: 24 * 60 * 60 * 1000, 
+    createDatabaseTable: true, 
     schema: {
-        tableName: 'sessions', // Tên bảng để lưu session
+        tableName: 'sessions', 
         columnNames: {
             session_id: 'session_id',
             expires: 'expires',
@@ -48,15 +49,16 @@ const sessionStoreOptions = {
 const sessionStore = new MySQLStore(sessionStoreOptions);
 app.use(session({
     secret: process.env.SESSION_SECRET || 'your_super_secret_key_hocai_db_session',
-    store: sessionStore, // <<< SỬ DỤNG MYSQL STORE
+    store: sessionStore, 
     resave: false,
     saveUninitialized: false,
     cookie: {
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000 // Phải khớp với 'expiration' của sessionStore
+        maxAge: 24 * 60 * 60 * 1000 
     }
 }));
+//Kiểm tra kết nối đến database
 pool.getConnection((err, connection) => {
     if (err) {
         console.error('Lỗi kết nối đến MySQL:', err.stack);
@@ -73,11 +75,11 @@ pool.getConnection((err, connection) => {
     }
     if (connection) {
         console.log('Đã kết nối thành công đến MySQL với ID ' + connection.threadId);
-        connection.release(); // Trả connection về pool sau khi kiểm tra
+        connection.release(); 
     }
 });
 app.use((req, res, next) => {
-    req.db = pool; // Gán pool vào req.db
+    req.db = pool; 
     next();
 });
 app.engine('hbs', engine({
@@ -96,43 +98,7 @@ app.use(express.json());
 app.use('/', mainRouter);
 app.use('/', authRouter);
 app.use('/chat', chatRouter);
-
-global.generateRandomPassword = function () {
-    const numbers = '0123456789';
-    const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const specialChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
-    let password = '';
-    for (let i = 0; i < 6; i++) {
-        password += numbers.charAt(Math.floor(Math.random() * numbers.length));
-    }
-    for (let i = 0; i < 5; i++) {
-        password += letters.charAt(Math.floor(Math.random() * letters.length));
-    }
-    password += specialChars.charAt(Math.floor(Math.random() * specialChars.length));
-    return password.split('').sort(() => 0.5 - Math.random()).join('');
-};
-
-// Hàm để thực thi file SQL
-async function executeSqlFile(filePath) {
-    try {
-        const sql = fs.readFileSync(filePath, 'utf8');
-        const connection = await pool.getConnection();
-        try {
-            // Tách các câu lệnh SQL và thực thi từng câu
-            const statements = sql.split(';').filter(statement => statement.trim());
-            for (const statement of statements) {
-                if (statement.trim()) {
-                    await connection.query(statement);
-                }
-            }
-            console.log('Đã thực thi thành công file SQL:', filePath);
-        } finally {
-            connection.release();
-        }
-    } catch (error) {
-        console.error('Lỗi khi thực thi file SQL:', error);
-    }
-}
+app.use('/admin', adminCoursesRouter);
 
 app.listen(port, async () => {
     console.log(`Server đang chạy tại http://localhost:${port}`);

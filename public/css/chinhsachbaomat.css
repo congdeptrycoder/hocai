@@ -1,12 +1,9 @@
 .policy-container {
     display: flex;
-    /* Đảm bảo chứa hộp có thể sử dụng flexbox */
     justify-content: center;
     align-items: flex-start;
-    /* Để căn chỉnh nội dung vào phía trên thay vì giữa */
     width: 100%;
     min-height: 100vh;
-    /* Đảm bảo chiều cao của container chiếm toàn bộ chiều cao của trang */
 }
 
 .policy-container-box {
@@ -14,11 +11,9 @@
     max-width: 1440px;
     padding: 20px;
     background-color: #f9f9f9;
-
     border-radius: 20px;
     box-shadow: -2px -2px 20px rgba(0, 0, 0, 0.25);
     overflow: visible;
-    /* Đảm bảo không bị ẩn */
 }
 
 .policy-title {
@@ -37,11 +32,7 @@
 }
 
 ol {
-
-    /* Hiển thị số thứ tự */
     padding-left: 20px;
-    /* Thêm khoảng cách bên trái để số không bị đè lên nội dung */
-
     font-size: 20px;
     text-align: left;
 }
@@ -66,7 +57,6 @@ ol>li {
     .policy {
         height: auto;
         justify-content: center;
-        /* Căn giữa ngang */
 
     }
 
@@ -78,9 +68,7 @@ ol>li {
         margin-top: 20px;
         display: flex;
         flex-direction: column;
-        /* 👈 Xếp các phần tử con theo chiều dọc */
         gap: 20px;
-        /* Khoảng cách giữa các phần tử */
         align-items: center;
     }
 
@@ -108,8 +96,6 @@ ol>li {
         max-width: 1200px;
         min-width: 800px;
         justify-content: center;
-        /* Căn giữa ngang */
-
     }
 
 

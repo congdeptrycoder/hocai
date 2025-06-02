@@ -1,10 +1,18 @@
-// Hàm check người dùng đã tồn tại hay chưa
+/**
+ * Tìm người dùng theo email
+ * @param {any} db
+ * @param {string} email
+ */
 async function findUserByEmail(db, email) {
     const [users] = await db.query('SELECT * FROM user_data WHERE email = ?', [email]);
     return users.length > 0 ? users[0] : null;
 }
 
-// Hàm lấy thông tin người dùng
+/**
+ * Lấy thông tin chi tiết người dùng theo email
+ * @param {any} db
+ * @param {string} email
+ */
 async function findUserDetailsByEmail(db, email) {
     const [users] = await db.query(
         'SELECT u.email, u.username, u.account, u.time_create, u.password, u.google_id, u.role, c.roadmap ' +
@@ -14,7 +22,11 @@ async function findUserDetailsByEmail(db, email) {
     return users.length > 0 ? users[0] : null;
 }
 
-// Hàm tạo người dùng mới
+/**
+ * Tạo người dùng mới
+ * @param {any} db
+ * @param {object} userData
+ */
 async function createUser(db, userData) {
     const { email, account, username, password, time_create, google_id } = userData;
     const [result] = await db.query(
@@ -28,30 +40,47 @@ async function createUser(db, userData) {
     return result.insertId;
 }
 
-// Hàm cập nhật Google ID cho người dùng chưa có
+/**
+ * Cập nhật Google ID cho người dùng
+ * @param {any} db
+ * @param {string} email
+ * @param {string} googleId
+ */
 async function updateUserGoogleId(db, email, googleId) {
     await db.query('UPDATE user_data SET google_id = ? WHERE email = ?', [googleId, email]);
 }
 
-// Hàm check người dùng bằng account
+/**
+ * Tìm người dùng theo account
+ * @param {any} db
+ * @param {string} account
+ */
 async function findUserByAccount(db, account) {
     const [users] = await db.query('SELECT * FROM user_data WHERE account = ?', [account]);
     return users.length > 0 ? users[0] : null;
 }
 
-// Lấy roadmap của user
+/**
+ * Lấy roadmap của user
+ * @param {any} db
+ * @param {string} email
+ */
 async function getUserRoadmap(db, email) {
     const [rows] = await db.query('SELECT roadmap FROM user_course WHERE email = ?', [email]);
     return rows.length > 0 ? rows[0].roadmap : null;
 }
 
-// Lấy danh sách khoá học và bài học đang học của user
+/**
+ * Lấy danh sách khoá học và bài học đang học của user
+ * @param {any} db
+ * @param {string} email
+ */
 async function getUserCoursesProgress(db, email) {
-    // Lấy roadmap tổng
+  
     const [roadmapRows] = await db.query('SELECT roadmap FROM user_course WHERE email = ?', [email]);
     if (!roadmapRows.length) return [];
     const roadmapStr = roadmapRows[0].roadmap;
-    // Lấy danh sách khoá học
+
     const [courses] = await db.query('SELECT id_course, name_course FROM course_list');
     const result = [];
     for (const course of courses) {
@@ -63,7 +92,6 @@ async function getUserCoursesProgress(db, email) {
         const courseRoadmap = roadmapStr.substring(firstIdx + tag.length, secondIdx);
         const lessonIndex = parseInt(courseRoadmap);
         if (!lessonIndex || lessonIndex === 0) continue;
-        // Lấy name_lesson đang học
         const [lessonRows] = await db.query(
             'SELECT name_lesson FROM lesson_name WHERE id_course = ? ORDER BY id_lesson ASC',
             [tag]
@@ -81,6 +109,32 @@ async function getUserCoursesProgress(db, email) {
     return result;
 }
 
+/**
+ * Cập nhật thông tin người dùng
+ * @param {any} db
+ * @param {string} oldEmail
+ * @param {object} param2
+ */
+async function updateUserInfo(db, oldEmail, { email, account, username, password }) {
+    let result;
+    if (password && password.length > 0) {
+        result = await db.query(
+            'UPDATE user_data SET email = ?, account = ?, username = ?, password = ? WHERE email = ?',
+            [email, account, username, password, oldEmail]
+        );
+    } else {
+        result = await db.query(
+            'UPDATE user_data SET email = ?, account = ?, username = ? WHERE email = ?',
+            [email, account, username, oldEmail]
+        );
+    }
+    console.log('Update user_data result:', result);
+    if (oldEmail !== email) {
+        const res2 = await db.query('UPDATE user_course SET email = ? WHERE email = ?', [email, oldEmail]);
+        console.log('Update user_course result:', res2);
+    }
+}
+
 module.exports = {
     findUserByEmail,
     findUserDetailsByEmail,
@@ -89,4 +143,5 @@ module.exports = {
     findUserByAccount,
     getUserRoadmap,
     getUserCoursesProgress,
+    updateUserInfo,
 };

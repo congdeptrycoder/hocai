@@ -34,7 +34,12 @@ const sampleData = [
     }
 ];
 
-// Hàm tính độ tương đồng giữa hai câu
+/**
+ * Tính độ tương đồng 
+ * @param {string} text1
+ * @param {string} text2
+ * @returns {number}
+ */
 function calculateSimilarity(text1, text2) {
     const tfidf = new TfIdf();
     tfidf.addDocument(text1);
@@ -53,7 +58,11 @@ function calculateSimilarity(text1, text2) {
     return similarity / Math.max(tokens1.length, tokens2.length);
 }
 
-// Hàm tìm câu trả lời phù hợp nhất
+/**
+ * Tìm câu trả lời phù hợp nhất với câu hỏi của người dùng
+ * @param {string} userQuestion
+ * @returns {{similarity: number, answer: string|null}}
+ */
 function findBestAnswer(userQuestion) {
     let bestMatch = {
         similarity: 0,
@@ -74,6 +83,11 @@ function findBestAnswer(userQuestion) {
 }
 
 module.exports = {
+    /**
+     * Bot trả lời
+     * @param {string} userMessage
+     * @returns {{type: string, content: string}}
+     */
     processMessage: function(userMessage) {
         const result = findBestAnswer(userMessage);
         

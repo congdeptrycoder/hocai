@@ -1,77 +1,53 @@
-/* --- Popup Styles --- */
 
-/* Lớp phủ nền */
 .popup-overlay {
     display: none;
-    /* Ẩn mặc định */
     position: fixed;
-    /* Che phủ toàn màn hình */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
-    /* Màu nền mờ */
     z-index: 1000;
-    /* Đảm bảo nó ở trên cùng */
     justify-content: center;
-    /* Căn giữa popup theo chiều ngang */
     align-items: center;
-    /* Căn giữa popup theo chiều dọc */
 }
 
-/* Container chính của popup */
 .popup-container {
     background-color: #fff;
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     width: 90%;
-    /* Chiều rộng trên màn hình nhỏ */
     max-width: 500px;
-    /* Chiều rộng tối đa */
     position: relative;
-    /* Để định vị nút đóng */
     max-height: 80vh;
-    /* Chiều cao tối đa, tránh quá dài */
     display: flex;
-    /* Sử dụng flexbox cho layout bên trong */
     flex-direction: column;
-    /* Các phần tử xếp chồng lên nhau */
 }
 
-/* Header của popup */
 .popup-header {
     display: flex;
     justify-content: space-between;
-    /* Đẩy tiêu đề và nút đóng ra 2 bên */
     align-items: center;
     border-bottom: 1px solid #eee;
-    /* Đường kẻ dưới tiêu đề */
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
 
 .popup-header h2 {
     margin: 0;
-    /* Bỏ margin mặc định của h2 */
     font-size: 22px;
-    /* Kích thước tiêu đề */
     color: #003459;
-    /* Màu tiêu đề giống màu chủ đạo */
 }
 
-/* Nút đóng (X) */
 .popup-close-btn {
     background: none;
     border: none;
     font-size: 28px;
-    /* Kích thước dấu X */
     color: #aaa;
     cursor: pointer;
     padding: 0 5px;
     line-height: 1;
-    /* Đảm bảo chiều cao vừa đủ */
     transition: color 0.2s ease;
 }
 
@@ -79,30 +55,22 @@
     color: #333;
 }
 
-/* Nội dung chính của popup */
 .popup-content {
     flex-grow: 1;
-    /* Cho phép nội dung co giãn */
     overflow-y: auto;
-    /* Tự động thêm thanh cuộn khi cần */
     margin-bottom: 15px;
-    /* Khoảng cách với footer (nếu có) */
 }
 
 .popup-content p {
     margin-bottom: 10px;
-    /* Khoảng cách giữa các dòng thông tin */
     line-height: 1.5;
     color: #333;
 }
 
 .popup-content p strong {
     color: #003459;
-    /* Màu cho nhãn */
     min-width: 130px;
-    /* Đảm bảo các nhãn thẳng hàng (tùy chỉnh) */
     display: inline-block;
-    /* Để min-width hoạt động */
 }
 
 .popup-content hr {
@@ -111,33 +79,25 @@
     margin: 15px 0;
 }
 
-/* Vùng chứa danh sách khóa học (cho phép cuộn riêng) */
 .popup-scrollable-content {
     max-height: 200px;
-    /* Chiều cao tối đa cho vùng cuộn */
     overflow-y: auto;
-    /* Luôn có thanh cuộn nếu nội dung dài */
     border: 1px solid #f0f0f0;
-    /* Viền nhẹ */
     padding: 10px;
     margin-top: 5px;
     border-radius: 4px;
     background-color: #f9f9f9;
-    /* Nền nhẹ */
 }
 
 .popup-scrollable-content ul {
     padding-left: 0;
-    /* Bỏ padding mặc định của ul */
     list-style: none;
-    /* Bỏ dấu chấm đầu dòng */
     margin: 0;
 }
 
 .popup-scrollable-content li {
     padding: 5px 0;
     border-bottom: 1px dashed #ddd;
-    /* Phân cách các khóa học */
 }
 
 .popup-scrollable-content li:last-child {
@@ -453,7 +413,6 @@
 
     .side-bar-menu.active {
         max-height: 500px;
-        /* Đủ lớn để chứa menu */
         padding: 10px 0;
     }
 
