@@ -95,10 +95,39 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Middleware ghi log mọi HTTP request vào file logs/access.log.
+// Mỗi dòng log gồm: thời gian, phương thức, URL, mã trạng thái, địa chỉ IP, user-agent.
+const logsDir = path.join(__dirname, 'logs');
+const accessLogPath = path.join(logsDir, 'access.log');
+if (!fs.existsSync(logsDir)) {
+    fs.mkdirSync(logsDir);
+}
+app.use((req, res, next) => {
+    const start = Date.now();
+    res.on('finish', () => {
+        const logLine = `${new Date().toISOString()} ${req.method} ${req.originalUrl} ${res.statusCode} ${req.ip} ${req.headers['user-agent'] || ''} ${Date.now() - start}ms\n`;
+        fs.appendFile(accessLogPath, logLine, err => {
+            if (err) console.error('Ghi log thất bại:', err);
+        });
+    });
+    next();
+});
+
 app.use('/', mainRouter);
 app.use('/', authRouter);
 app.use('/chat', chatRouter);
 app.use('/admin', adminCoursesRouter);
+
+// Middleware ghi log lỗi vào file logs/error.log.
+// Mỗi dòng log gồm: thời gian, phương thức, URL, mã trạng thái, địa chỉ IP, user-agent, thông báo lỗi, stack trace (nếu có).
+const errorLogPath = path.join(logsDir, 'error.log');
+app.use((err, req, res, next) => {
+    const logLine = `${new Date().toISOString()} ${req.method} ${req.originalUrl} ${res.statusCode} ${req.ip} ${req.headers['user-agent'] || ''} ${err.message} ${err.stack || ''}\n`;
+    fs.appendFile(errorLogPath, logLine, error => {
+        if (error) console.error('Ghi log lỗi thất bại:', error);
+    });
+    next(err);
+});
 
 app.listen(port, async () => {
     console.log(`Server đang chạy tại http://localhost:${port}`);
